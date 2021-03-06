@@ -32,12 +32,13 @@ import javax.net.ssl.SSLContext;
 
 public class Registration extends AppCompatActivity {
 
-    String url = "http://134.209.250.135:8080/register";
+    String url_register = "http://134.209.250.135:8080/register";
 
     String name, username, email, password;
     EditText input_name, input_username, input_email, input_password;
     Button button;
     TextView message;
+    TextView name_er, username_er, password_er, email_er;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,11 @@ public class Registration extends AppCompatActivity {
         button = (Button) findViewById(R.id.button_register);
         message = (TextView) findViewById(R.id.textView2);
 
+        name_er = (TextView) findViewById(R.id.name_error);
+        username_er = (TextView) findViewById(R.id.username_error);
+        password_er = (TextView) findViewById(R.id.password_error);
+        email_er = (TextView) findViewById(R.id.email_error);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,63 +66,90 @@ public class Registration extends AppCompatActivity {
                 password = input_password.getText().toString();
                 email = input_email.getText().toString();
 
-                JSONObject test = new JSONObject();
-                try {
-                    test.put("name", name);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    test.put("username", username);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    test.put("password", password);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    test.put("email", email);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                if(val_name() && val_username() && val_password() && val_email())
+                {
+                    JSONObject test = new JSONObject();
+                    try {
+                        test.put("name", name);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        test.put("username", username);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        test.put("password", password);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        test.put("email", email);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
 
-                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                        (Request.Method.POST, url, test, new Response.Listener<JSONObject>() {
+                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                            (Request.Method.POST, url_register, test, new Response.Listener<JSONObject>() {
 
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                message.setText("Response: " + response.toString());
-                                Log.i("tag", "test");
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    message.setText("Response: " + response.toString());
+                                    Log.i("tag", "test");
 
 
-                                Intent intent = new Intent(getApplicationContext(), Login.class);
-                                startActivity(intent);
-                            }
-                        }, new Response.ErrorListener() {
-
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                // TODO: Handle error
-                                //error.printStackTrace();
-                                JSONObject er = null;
-                                try {
-                                    er = new JSONObject(new String(error.networkResponse.data));
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
+                                    Intent intent = new Intent(getApplicationContext(), Login.class);
+                                    startActivity(intent);
                                 }
-                                message.setText("Error: " + er);
-                            }
-                        });
+                            }, new Response.ErrorListener() {
 
-                // Access the RequestQueue through your singleton class.
-                RequestGate.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    // TODO: Handle error
+                                    //error.printStackTrace();
+                                    JSONObject er = null;
+                                    try {
+                                        er = new JSONObject(new String(error.networkResponse.data));
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    message.setText("Error: " + er);
+                                }
+                            });
+
+                    // Access the RequestQueue through your singleton class.
+                    RequestGate.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
+                }
+
 
             }
         });
 
 
+    }
+
+    private boolean val_email() {
+        // tik viena eta zenkla
+        // ir pries ir po eta zenklo turi but po dvi raides
+        return true;
+    }
+
+    private boolean val_password() {
+        //ilgesnis nei penki simboliai
+        // turi tureti arba bent viena skaiciu arba bent viena special simboli
+        return true;
+    }
+
+    private boolean val_username() {
+        //ilgesnis nei keturios raides
+        return true;
+    }
+
+    private boolean val_name() {
+        // ilgesnis nei dvi raides
+        // negali but nei skaiciu nei simboliu
+        return true;
     }
 }

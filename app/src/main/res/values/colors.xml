@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="font_color">#1d1523</color>
+    <color name="error_color">#ff0033</color>
 
     <color name="first">#48cccc</color>
     <color name="second">#58acd4</color>

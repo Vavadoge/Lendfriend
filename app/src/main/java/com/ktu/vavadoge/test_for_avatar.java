@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 public class test_for_avatar extends AppCompatActivity {
 
+    //Cia laikina Vaivos pagalbine klase
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

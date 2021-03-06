@@ -167,6 +167,7 @@ public class Registration extends AppCompatActivity {
         return true;
     }
 
+    // Validates that the username is more than 4 characters long
     private boolean val_username(String username) {
         if(username.length() > 4)
         {

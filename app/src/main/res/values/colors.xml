@@ -15,4 +15,6 @@
     <color name="third">#5c8cc3</color>
     <color name="fourth">#7466af</color>
     <color name="fifth">#74578c</color>
+    <color name="login_button_background">#33673AB7</color>
+
 </resources>

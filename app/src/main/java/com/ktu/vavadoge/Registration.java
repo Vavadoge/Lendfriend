@@ -77,7 +77,7 @@ public class Registration extends AppCompatActivity {
                 password = input_password.getText().toString();
                 email = input_email.getText().toString();
 
-                if(val_name() && val_username() && val_password() && val_email())
+                if(val_name(name) && val_username(username) && val_password(password) && val_email(email))
                 {
                     JSONObject test = new JSONObject();
                     try {
@@ -153,24 +153,29 @@ public class Registration extends AppCompatActivity {
 
     }
 
-    private boolean val_email() {
+    // jeigu atnestas string yra tinkamas pagal salyga tai true
+
+    private boolean val_email(String email) {
         // tik viena eta zenkla
         // ir pries ir po eta zenklo turi but po dvi raides
         return true;
     }
 
-    private boolean val_password() {
+    private boolean val_password(String password) {
         //ilgesnis nei penki simboliai
         // turi tureti arba bent viena skaiciu arba bent viena special simboli
         return true;
     }
 
-    private boolean val_username() {
-        //ilgesnis nei keturios raides
-        return true;
+    private boolean val_username(String username) {
+        if(username.length() > 4)
+        {
+            return true;
+        }
+        return false;
     }
 
-    private boolean val_name() {
+    private boolean val_name(String name) {
         // ilgesnis nei dvi raides
         // negali but nei skaiciu nei simboliu
         return true;

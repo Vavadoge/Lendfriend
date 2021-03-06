@@ -19,8 +19,10 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.security.ProviderInstaller;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URL;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 
@@ -28,7 +30,7 @@ import javax.net.ssl.SSLContext;
 
 public class Registration extends AppCompatActivity {
 
-    String url = "https://134.209.250.135:8080/version";
+    String url = "http://134.209.250.135:8080/register";
 
     String name, username, email, password;
     EditText input_name, input_username, input_email, input_password;
@@ -48,6 +50,7 @@ public class Registration extends AppCompatActivity {
 
         button = (Button) findViewById(R.id.button_register);
         message = (TextView) findViewById(R.id.textView2);
+        requestQueue = Volley.newRequestQueue(this);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,50 +60,58 @@ public class Registration extends AppCompatActivity {
                 password = input_password.getText().toString();
                 email = input_email.getText().toString();
 
+                JSONObject test = new JSONObject();
+                try {
+                    test.put("name", name);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    test.put("username", username);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    test.put("password", password);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    test.put("email", email);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                        (Request.Method.POST, url, test, new Response.Listener<JSONObject>() {
+
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                message.setText("Response: " + response.toString());
+                                Log.i("tag", "test");
+                            }
+                        }, new Response.ErrorListener() {
+
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                // TODO: Handle error
+                                //error.printStackTrace();
+                                JSONObject er = null;
+                                try {
+                                    er = new JSONObject(new String(error.networkResponse.data));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                message.setText("Error: " + er);
+                            }
+                        });
+
+                // Access the RequestQueue through your singleton class.
+                requestQueue.add(jsonObjectRequest);
             }
         });
 
-        /*try {
-            ProviderInstaller.installIfNeeded(getApplicationContext());
-        } catch (GooglePlayServicesRepairableException e) {
-            e.printStackTrace();
-        } catch (GooglePlayServicesNotAvailableException e) {
-            e.printStackTrace();
-        }*/
-
-        //try { ProviderInstaller.installIfNeeded(this); } catch (Exception e) { e.getMessage(); }
-
-        try {
-            ProviderInstaller.installIfNeeded(getApplicationContext());
-            SSLContext sslContext;
-            sslContext = SSLContext.getInstance("TLSv1.2");
-            sslContext.init(null, null, null);
-            sslContext.createSSLEngine();
-        } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException
-                | NoSuchAlgorithmException | KeyManagementException e) {
-            e.printStackTrace();
-        }
-
-        requestQueue = Volley.newRequestQueue(this);
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        message.setText("Response: " + response.toString());
-                        Log.i("tag", "test");
-                    }
-                }, new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // TODO: Handle error
-                        error.printStackTrace();
-                    }
-                });
-
-// Access the RequestQueue through your singleton class.
-        requestQueue.add(jsonObjectRequest);
 
     }
 }

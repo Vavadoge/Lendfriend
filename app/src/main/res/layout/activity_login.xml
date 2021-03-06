@@ -47,7 +47,7 @@
         android:layout_width="170dp"
         android:layout_height="159dp"
         android:layout_marginTop="36dp"
-        android:background="@mipmap/ic_logo_round"
+        android:background="@mipmap/ic_launcher_round"
         android:outlineAmbientShadowColor="@color/fourth"
         android:outlineSpotShadowColor="@color/first"
         app:layout_constraintEnd_toEndOf="parent"

@@ -24,17 +24,32 @@ public class Profile extends AppCompatActivity {
     String url_logout = "http://134.209.250.135:8080/user/logout";
     String url_take_data = "http://134.209.250.135:8080/user/self";
     TextView message;
+    // Papildyt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         logout = (Button) findViewById(R.id.logout_button);
         message = (TextView) findViewById(R.id.textView6);
+        // papildyt
 
         JsonObjectRequest jsn = new JsonObjectRequest(Request.Method.GET, url_take_data, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 message.setText("Response2: " + response.toString());
+
+                // Pasiimti iš json response'o informaciją, ir ją išspausdinti gražiai į profilį
+                // priskirt kintamuosius
+                // pvz:
+                //
+                //JSONObject json = new JSONObject(yourdata);
+                //String statistics = json.getString("statistics");
+                //String ageJohn = name1.getString("Age");
+                //
+                //priskirti texview jau tą informaciją
+                //
+                //pvz: message.setText("KAZKOKS TEKSTAS");
+
 
             }
         }, new Response.ErrorListener() {
@@ -80,7 +95,6 @@ public class Profile extends AppCompatActivity {
 
                                 Intent intent = new Intent(getApplicationContext(), Login.class);
                                 startActivity(intent);
-                                // grizt i login
                             }
                         }, new Response.ErrorListener() {
 

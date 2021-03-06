@@ -2,6 +2,7 @@ package com.ktu.vavadoge;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +26,7 @@ import org.json.JSONObject;
 import java.net.URL;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.SSLContext;
 
@@ -36,7 +38,6 @@ public class Registration extends AppCompatActivity {
     EditText input_name, input_username, input_email, input_password;
     Button button;
     TextView message;
-    RequestQueue requestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,6 @@ public class Registration extends AppCompatActivity {
 
         button = (Button) findViewById(R.id.button_register);
         message = (TextView) findViewById(R.id.textView2);
-        requestQueue = Volley.newRequestQueue(this);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +90,10 @@ public class Registration extends AppCompatActivity {
                             public void onResponse(JSONObject response) {
                                 message.setText("Response: " + response.toString());
                                 Log.i("tag", "test");
+
+
+                                Intent intent = new Intent(getApplicationContext(), Login.class);
+                                startActivity(intent);
                             }
                         }, new Response.ErrorListener() {
 
@@ -108,7 +112,8 @@ public class Registration extends AppCompatActivity {
                         });
 
                 // Access the RequestQueue through your singleton class.
-                requestQueue.add(jsonObjectRequest);
+                RequestGate.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
+
             }
         });
 

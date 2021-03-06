@@ -28,6 +28,94 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        logout = (Button) findViewById(R.id.logout_button);
+        message = (TextView) findViewById(R.id.textView6);
+
+        JsonObjectRequest jsn = new JsonObjectRequest(Request.Method.GET, url_take_data, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                message.setText("Response2: " + response.toString());
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                try {
+                    if(error.networkResponse != null)
+                    {
+                        if(error.networkResponse.data != null)
+                        {
+                            message.setText("Error: " + new JSONObject(new String(error.networkResponse.data)));
+                        }
+                        else
+                        {
+                            message.setText(String.valueOf(error.networkResponse.statusCode));
+                        }
+                    }
+                    else
+                    {
+                        message.setText("null");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        });
+        RequestGate.getInstance(getApplicationContext()).addToRequestQueue(jsn);
+
+
+
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StringRequest jsonObjectRequest = new StringRequest
+                        (Request.Method.DELETE, url_logout, new Response.Listener<String>() {
+
+                            @Override
+                            public void onResponse(String response) {
+                                message.setText("Response: " + response);
+                                Log.i("tag", "test");
+
+                                Intent intent = new Intent(getApplicationContext(), Login.class);
+                                startActivity(intent);
+                                // grizt i login
+                            }
+                        }, new Response.ErrorListener() {
+
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                // TODO: Handle error
+                                //error.printStackTrace();
+
+                                try {
+                                    if(error.networkResponse != null)
+                                    {
+                                        if(error.networkResponse.data != null)
+                                        {
+                                            message.setText("Error: " + new JSONObject(new String(error.networkResponse.data)));
+                                        }
+                                        else
+                                        {
+                                            message.setText(String.valueOf(error.networkResponse.statusCode));
+                                        }
+                                    }
+                                    else
+                                    {
+                                        message.setText("null");
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        });
+
+                // Access the RequestQueue through your singleton class.
+                RequestGate.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
+            }
+        });
 
 
 

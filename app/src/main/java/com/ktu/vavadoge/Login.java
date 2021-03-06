@@ -23,16 +23,14 @@ import java.util.concurrent.TimeUnit;
 
 public class Login extends AppCompatActivity {
 
-    // Database url's
+    // Database url
     String url_login = "http://134.209.250.135:8080/login";
-    String url_logout = "http://134.209.250.135:8080/user/logout";
 
     // Declaring the needed variables
     String username, password;
     EditText input_username, input_password;
-    TextView message;
+    TextView message, sign_up;
     Button button;
-    Button logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +42,17 @@ public class Login extends AppCompatActivity {
         input_username = (EditText) findViewById(R.id.editTextTextPersonName);
         input_password = (EditText) findViewById(R.id.editTextTextPassword);
         message = (TextView) findViewById(R.id.textView4);
-        logout = (Button) findViewById(R.id.button_logout);
+        sign_up = (TextView) findViewById(R.id.sign_up);
+
+        sign_up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Registration.class);
+                startActivity(intent);
+            }
+        });
+
+
 
 
         // This is what happens after...
@@ -114,54 +122,6 @@ public class Login extends AppCompatActivity {
 
 
 
-            }
-        });
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                StringRequest jsonObjectRequest = new StringRequest
-                        (Request.Method.DELETE, url_logout, new Response.Listener<String>() {
-
-                            @Override
-                            public void onResponse(String response) {
-                                message.setText("Response: " + response);
-                                Log.i("tag", "test");
-
-                                //numesti i login
-
-                            }
-                        }, new Response.ErrorListener() {
-
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                // TODO: Handle error
-                                //error.printStackTrace();
-
-                                try {
-                                    if(error.networkResponse != null)
-                                    {
-                                        if(error.networkResponse.data != null)
-                                        {
-                                            message.setText("Error: " + new JSONObject(new String(error.networkResponse.data)));
-                                        }
-                                        else
-                                        {
-                                            message.setText(String.valueOf(error.networkResponse.statusCode));
-                                        }
-                                    }
-                                    else
-                                    {
-                                        message.setText("null");
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-
-                            }
-                        });
-
-                // Access the RequestQueue through your singleton class.
-                RequestGate.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
             }
         });
     }

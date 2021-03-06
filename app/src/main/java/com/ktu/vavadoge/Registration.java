@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextClock;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -37,7 +38,7 @@ public class Registration extends AppCompatActivity {
     String name, username, email, password;
     EditText input_name, input_username, input_email, input_password;
     Button button;
-    TextView message;
+    TextView message, sign_in;
     TextView name_er, username_er, password_er, email_er;
 
     @Override
@@ -52,11 +53,21 @@ public class Registration extends AppCompatActivity {
 
         button = (Button) findViewById(R.id.button_register);
         message = (TextView) findViewById(R.id.textView2);
+        sign_in = (TextView) findViewById(R.id.sign_in);
 
         name_er = (TextView) findViewById(R.id.name_error);
         username_er = (TextView) findViewById(R.id.username_error);
         password_er = (TextView) findViewById(R.id.password_error);
         email_er = (TextView) findViewById(R.id.email_error);
+
+
+        sign_in.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Login.class);
+                startActivity(intent);
+            }
+        });
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,15 +118,27 @@ public class Registration extends AppCompatActivity {
 
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
-                                    // TODO: Handle error
-                                    //error.printStackTrace();
-                                    JSONObject er = null;
+
                                     try {
-                                        er = new JSONObject(new String(error.networkResponse.data));
+                                        if(error.networkResponse != null)
+                                        {
+                                            if(error.networkResponse.data != null)
+                                            {
+                                                message.setText("Error: " + new JSONObject(new String(error.networkResponse.data)));
+                                            }
+                                            else
+                                            {
+                                                message.setText(String.valueOf(error.networkResponse.statusCode));
+                                            }
+                                        }
+                                        else
+                                        {
+                                            message.setText("null");
+                                        }
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
-                                    message.setText("Error: " + er);
+
                                 }
                             });
 

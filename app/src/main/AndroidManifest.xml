@@ -12,20 +12,18 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.Vavadoge">
-
-        <activity android:name=".test_for_avatar">
-        </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".test_for_avatar"></activity>
         <activity
             android:name=".Registration"
             android:theme="@style/Theme.Design.Light.NoActionBar">
-            <intent-filter>
+        <activity android:name=".Login">
+          <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter></activity>
+        <activity android:name=".MainActivity">
         </activity>
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

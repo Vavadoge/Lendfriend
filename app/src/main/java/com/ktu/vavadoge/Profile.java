@@ -28,7 +28,8 @@ public class Profile extends AppCompatActivity {
     TextView email;
     TextView test;
     TextView time;
-    // Papildyt
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,17 +40,13 @@ public class Profile extends AppCompatActivity {
         email = (TextView)findViewById(R.id.profile_email_text);
         test = (TextView) findViewById(R.id.username_field);
         time = (TextView) findViewById(R.id.time_field);
-        // papildyt
+
 
         JsonObjectRequest jsn = new JsonObjectRequest(Request.Method.GET, url_take_data, null, new Response.Listener<JSONObject>() {
+            //assigns json object values to string and then to appropriate text box
             @Override
             public void onResponse(JSONObject response) {
                 //message.setText("Response2: " + response.toString());
-
-                // Pasiimti iš json response'o informaciją, ir ją išspausdinti gražiai į profilį
-                // priskirt kintamuosius
-                // pvz:
-                //
 
                 String usernames = null;
                 try {
@@ -75,21 +72,14 @@ public class Profile extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                //JSONObject json = new JSONObject(yourdata);
-                //String statistics = json.getString("statistics");
-                //String ageJohn = name1.getString("Age");
-                //
-                //priskirti texview jau tą informaciją
                 name.setText(names);
                 email.setText(emails);
                 test.setText(usernames);
                 time.setText(time_value);
-                //
-                //pvz: message.setText("KAZKOKS TEKSTAS");
-
 
             }
         }, new Response.ErrorListener() {
+            //error message
             @Override
             public void onErrorResponse(VolleyError error) {
                 try {
@@ -116,10 +106,9 @@ public class Profile extends AppCompatActivity {
         });
         RequestGate.getInstance(getApplicationContext()).addToRequestQueue(jsn);
 
-
-
-
         logout.setOnClickListener(new View.OnClickListener() {
+
+            //when user press log out button, the  profile page is redirected to login page
             @Override
             public void onClick(View v) {
                 StringRequest jsonObjectRequest = new StringRequest
@@ -135,6 +124,7 @@ public class Profile extends AppCompatActivity {
                             }
                         }, new Response.ErrorListener() {
 
+                            //error message
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 // TODO: Handle error
@@ -167,8 +157,5 @@ public class Profile extends AppCompatActivity {
                 RequestGate.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
             }
         });
-
-
-
     }
 }

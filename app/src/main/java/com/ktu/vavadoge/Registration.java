@@ -53,7 +53,7 @@ public class Registration extends AppCompatActivity {
 
         button = (Button) findViewById(R.id.button_register);
         message = (TextView) findViewById(R.id.textView2);
-        sign_in = (TextView) findViewById(R.id.sign_in); //?
+        sign_in = (TextView) findViewById(R.id.sign_in);
 
         name_er = (TextView) findViewById(R.id.name_error);
         username_er = (TextView) findViewById(R.id.username_error);
@@ -62,12 +62,14 @@ public class Registration extends AppCompatActivity {
 
 
         sign_in.setOnClickListener(new View.OnClickListener() {
+            //when user press registration button, the  registration  page is redirected to login page
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Login.class);
                 startActivity(intent);
             }
         });
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +79,7 @@ public class Registration extends AppCompatActivity {
                 password = input_password.getText().toString();
                 email = input_email.getText().toString();
 
+                //if all validation is correct then puts all the input values to json object
                 if(val_name(name) && val_username(username) && val_password(password) && val_email(email))
                 {
                     JSONObject test = new JSONObject();
@@ -116,6 +119,7 @@ public class Registration extends AppCompatActivity {
                                 }
                             }, new Response.ErrorListener() {
 
+                                //error message
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
 
@@ -152,9 +156,7 @@ public class Registration extends AppCompatActivity {
 
 
     }
-
-    // jeigu atnestas string yra tinkamas pagal salyga tai true
-
+    // validation of input fields
     private boolean val_email(String email) {
         // tik viena eta zenkla
         // ir pries ir po eta zenklo turi but po dvi raides
@@ -162,13 +164,13 @@ public class Registration extends AppCompatActivity {
         for(int i=0; i<email.length(); i++)
         {
             if(i=='@' ){
-                if(Character.isLetter(email.charAt(i-2)) &&Character.isLetter(email.charAt(i-1)) && Character.isLetter(email.charAt(i+2))
-                        && Character.isLetter(email.charAt(i+1))) {
+                if(Character.isLetter(email.charAt(i-3)) && Character.isLetter(email.charAt(i-2)) && Character.isLetter(email.charAt(i-1)) && Character.isLetter(email.charAt(i+2))
+                        && Character.isLetter(email.charAt(i+1)) && Character.isLetter(email.charAt(i+3))) {
                     count++;
                 }
             }
         }
-        if (count==1)
+        if (count==1 && email.length()>=5)
             return true;
         else
             return false;*/
@@ -188,7 +190,7 @@ public class Registration extends AppCompatActivity {
         }
 
         }
-        if(password.length()>5 && (countNumbers>0 ||countSpecialSymbol >0))
+        if(password.length()>5 && (countNumbers>0 || countSpecialSymbol >0))
         {
             return true;
         }

@@ -107,8 +107,8 @@ public class Registration extends AppCompatActivity {
 
                                 @Override
                                 public void onResponse(JSONObject response) {
-                                    message.setText("Response: " + response.toString());
-                                    Log.i("tag", "test");
+                                    //message.setText("Response: " + response.toString());
+                                    //Log.i("tag", "test");
 
 
                                     Intent intent = new Intent(getApplicationContext(), Login.class);
@@ -158,7 +158,7 @@ public class Registration extends AppCompatActivity {
     private boolean val_email(String email) {
         // tik viena eta zenkla
         // ir pries ir po eta zenklo turi but po dvi raides
-        int count =0;
+        /*int count =0;
         for(int i=0; i<email.length(); i++)
         {
             if(i=='@' ){
@@ -171,11 +171,12 @@ public class Registration extends AppCompatActivity {
         if (count==1)
             return true;
         else
-            return false;
+            return false;*/
+        return true;
     }
 
     private boolean val_password(String password) {
-        int countNumbers=0;
+        /*int countNumbers=0;
         int countSpecialSymbol=0;
         for(int i=0; i<password.length(); i++)
         {
@@ -192,7 +193,8 @@ public class Registration extends AppCompatActivity {
             return true;
         }
         else
-            return false;
+            return false;*/
+        return true;
         //ilgesnis nei penki simboliai
         // turi tureti arba bent viena skaiciu arba bent viena special simboli
 
@@ -200,17 +202,18 @@ public class Registration extends AppCompatActivity {
 
     // Validates that the username is more than 4 characters long
     private boolean val_username(String username) {
-        if(username.length() > 4)
+        /*if(username.length() > 4)
         {
             return true;
         }
-        return false;
+        return false;*/
+        return true;
     }
 
     private boolean val_name(String name) {
         // ilgesnis nei dvi raides
         // negali but nei skaiciu nei simboliu
-        int countNumbers=0;
+        /*int countNumbers=0;
         int countSpecialSymbol=0;
         for(int i=0; i<name.length(); i++) {
             if (Character.isDigit(name.charAt(i))) {
@@ -226,6 +229,7 @@ public class Registration extends AppCompatActivity {
             return true;
         }
         else
-            return false;
+            return false;*/
+        return true;
     }
 }

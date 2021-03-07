@@ -86,7 +86,6 @@
         android:hint="Password"
         android:inputType="textPassword"
         android:textColorHint="@color/fourth"
-        android:textSize="15dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -106,7 +105,6 @@
         android:hint="Username"
         android:inputType="textPersonName"
         android:textColorHint="@color/fourth"
-        android:textSize="15dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -118,7 +116,7 @@
         android:id="@+id/textView2"
         android:layout_width="206dp"
         android:layout_height="24dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="32dp"
         android:fontFamily="@font/abeezee"
         android:text="Don't have an account?"
@@ -142,7 +140,7 @@
         android:textColor="@color/first"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.34"
+        app:layout_constraintHorizontal_bias="0.24"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/view3" />
 

@@ -79,7 +79,7 @@ public class Login extends AppCompatActivity {
 
                             @Override
                             public void onResponse(JSONObject response) {
-                                message.setText("Response: " + response.toString());
+                                //message.setText("Response: " + response.toString());
 
                                 // If the log in is successful, the user is taken to their profile
                                 Intent intent = new Intent(getApplicationContext(), Profile.class);

@@ -15,7 +15,6 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".Profile"
             android:theme="@style/Theme.Design.Light.NoActionBar"></activity>
-        <activity android:name=".test_for_avatar" />
         <activity
             android:name=".Registration"
             android:theme="@style/Theme.Design.Light.NoActionBar">

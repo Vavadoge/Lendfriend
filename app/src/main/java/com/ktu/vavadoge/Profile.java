@@ -24,6 +24,9 @@ public class Profile extends AppCompatActivity {
     String url_logout = "http://134.209.250.135:8080/user/logout";
     String url_take_data = "http://134.209.250.135:8080/user/self";
     TextView message;
+    TextView username;
+    TextView name;
+    TextView email;
     // Papildyt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,9 @@ public class Profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         logout = (Button) findViewById(R.id.logout_button);
         message = (TextView) findViewById(R.id.textView6);
+        username = (TextView)findViewById(R.id.profile_username_text);
+        name = (TextView)findViewById(R.id.profile_name_text);
+        email = (TextView)findViewById(R.id.profile_email_text);
         // papildyt
 
         JsonObjectRequest jsn = new JsonObjectRequest(Request.Method.GET, url_take_data, null, new Response.Listener<JSONObject>() {
@@ -42,11 +48,33 @@ public class Profile extends AppCompatActivity {
                 // priskirt kintamuosius
                 // pvz:
                 //
+
+                String usernames = null;
+                try {
+                    usernames = response.getString("username");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                String names = null;
+                try {
+                    names = response.getString("name");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                String emails= null;
+                try {
+                    emails = response.getString("email");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 //JSONObject json = new JSONObject(yourdata);
                 //String statistics = json.getString("statistics");
                 //String ageJohn = name1.getString("Age");
                 //
                 //priskirti texview jau tą informaciją
+                username.setText(usernames);
+                name.setText(names);
+                email.setText(emails);
                 //
                 //pvz: message.setText("KAZKOKS TEKSTAS");
 

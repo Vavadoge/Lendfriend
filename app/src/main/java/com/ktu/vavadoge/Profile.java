@@ -24,6 +24,10 @@ public class Profile extends AppCompatActivity {
     String url_logout = "http://134.209.250.135:8080/user/logout";
     String url_take_data = "http://134.209.250.135:8080/user/self";
     TextView message;
+    TextView name;
+    TextView email;
+    TextView test;
+    TextView time;
     // Papildyt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,22 +35,55 @@ public class Profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         logout = (Button) findViewById(R.id.logout_button);
         message = (TextView) findViewById(R.id.textView6);
+        name = (TextView)findViewById(R.id.profile_name_text);
+        email = (TextView)findViewById(R.id.profile_email_text);
+        test = (TextView) findViewById(R.id.username_field);
+        time = (TextView) findViewById(R.id.time_field);
         // papildyt
 
         JsonObjectRequest jsn = new JsonObjectRequest(Request.Method.GET, url_take_data, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                message.setText("Response2: " + response.toString());
+                //message.setText("Response2: " + response.toString());
 
                 // Pasiimti iš json response'o informaciją, ir ją išspausdinti gražiai į profilį
                 // priskirt kintamuosius
                 // pvz:
                 //
+
+                String usernames = null;
+                try {
+                    usernames = response.getString("username");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                String names = null;
+                try {
+                    names = response.getString("name");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                String emails= null;
+                try {
+                    emails = response.getString("email");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                String time_value = null;
+                try {
+                    time_value = response.getString("created_at");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 //JSONObject json = new JSONObject(yourdata);
                 //String statistics = json.getString("statistics");
                 //String ageJohn = name1.getString("Age");
                 //
                 //priskirti texview jau tą informaciją
+                name.setText(names);
+                email.setText(emails);
+                test.setText(usernames);
+                time.setText(time_value);
                 //
                 //pvz: message.setText("KAZKOKS TEKSTAS");
 

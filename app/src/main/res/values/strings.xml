@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Vavadoge</string>
+    <string name="app_name">Lendfriend</string>
     <string name="registration_name">Name</string>
     <string name="registration_username">Username</string>
     <string name="registration_password">Password</string>

@@ -53,7 +53,7 @@ public class Registration extends AppCompatActivity {
 
         button = (Button) findViewById(R.id.button_register);
         message = (TextView) findViewById(R.id.textView2);
-        sign_in = (TextView) findViewById(R.id.sign_in);
+        sign_in = (TextView) findViewById(R.id.sign_in); //?
 
         name_er = (TextView) findViewById(R.id.name_error);
         username_er = (TextView) findViewById(R.id.username_error);
@@ -107,8 +107,8 @@ public class Registration extends AppCompatActivity {
 
                                 @Override
                                 public void onResponse(JSONObject response) {
-                                    message.setText("Response: " + response.toString());
-                                    Log.i("tag", "test");
+                                    //message.setText("Response: " + response.toString());
+                                    //Log.i("tag", "test");
 
 
                                     Intent intent = new Intent(getApplicationContext(), Login.class);
@@ -158,27 +158,78 @@ public class Registration extends AppCompatActivity {
     private boolean val_email(String email) {
         // tik viena eta zenkla
         // ir pries ir po eta zenklo turi but po dvi raides
+        /*int count =0;
+        for(int i=0; i<email.length(); i++)
+        {
+            if(i=='@' ){
+                if(Character.isLetter(email.charAt(i-2)) &&Character.isLetter(email.charAt(i-1)) && Character.isLetter(email.charAt(i+2))
+                        && Character.isLetter(email.charAt(i+1))) {
+                    count++;
+                }
+            }
+        }
+        if (count==1)
+            return true;
+        else
+            return false;*/
         return true;
     }
 
     private boolean val_password(String password) {
+        /*int countNumbers=0;
+        int countSpecialSymbol=0;
+        for(int i=0; i<password.length(); i++)
+        {
+            if(Character.isDigit(password.charAt(i))) {
+                countNumbers++;
+            }
+            if(password.charAt(i) =='.' || password.charAt(i) =='!' || password.charAt(i) =='?'  ) {
+                countSpecialSymbol++;
+        }
+
+        }
+        if(password.length()>5 && (countNumbers>0 ||countSpecialSymbol >0))
+        {
+            return true;
+        }
+        else
+            return false;*/
+        return true;
         //ilgesnis nei penki simboliai
         // turi tureti arba bent viena skaiciu arba bent viena special simboli
-        return true;
+
     }
 
     // Validates that the username is more than 4 characters long
     private boolean val_username(String username) {
-        if(username.length() > 4)
+        /*if(username.length() > 4)
         {
             return true;
         }
-        return false;
+        return false;*/
+        return true;
     }
 
     private boolean val_name(String name) {
         // ilgesnis nei dvi raides
         // negali but nei skaiciu nei simboliu
+        /*int countNumbers=0;
+        int countSpecialSymbol=0;
+        for(int i=0; i<name.length(); i++) {
+            if (Character.isDigit(name.charAt(i))) {
+                countNumbers++;
+            }
+            if (name.charAt(i) == '.' || name.charAt(i) == '!' || name.charAt(i) == '?') {
+                countSpecialSymbol++;
+            }
+        }
+
+        if(name.length()>2 && countNumbers==0 && countSpecialSymbol ==0)
+        {
+            return true;
+        }
+        else
+            return false;*/
         return true;
     }
 }

@@ -65,8 +65,10 @@ public class Registration extends AppCompatActivity {
             //when user press registration button, the  registration  page is redirected to login page
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Login.class);
-                startActivity(intent);
+           //     if(val_name(name) && val_username(username) && val_password(password) && val_email(email)) {
+                    Intent intent = new Intent(getApplicationContext(), Login.class);
+                    startActivity(intent);
+           //     }
             }
         });
 
@@ -78,8 +80,39 @@ public class Registration extends AppCompatActivity {
                 username = input_username.getText().toString();
                 password = input_password.getText().toString();
                 email = input_email.getText().toString();
-
-                //if all validation is correct then puts all the input values to json object
+              /*  if(val_name(name)==false)
+                {
+                    name_er.setText("name is not valid");
+                }
+                email = input_email.getText().toString();
+                if(val_name(name))
+                {
+                    name_er.setText("");
+                }
+                if(val_email(email)==false)
+                {
+                    email_er.setText("email is not valid");
+                }
+                if(val_email(email))
+                {
+                    email_er.setText("");
+                }
+                if(val_password(password)==false)
+                {
+                    password_er.setText("password is not valid");
+                }
+                if(val_password(password))
+                {
+                    password_er.setText("");
+                }
+                if(val_username(username)==false)
+                {
+                    username_er.setText("username is not valid");
+                }
+                if(val_username(username))
+                {
+                    username_er.setText("");
+                }*/
                 if(val_name(name) && val_username(username) && val_password(password) && val_email(email))
                 {
                     JSONObject test = new JSONObject();
@@ -150,6 +183,77 @@ public class Registration extends AppCompatActivity {
                     RequestGate.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
                 }
 
+                //if all validation is correct then puts all the input values to json object
+               /* if(val_name(name) && val_username(username) && val_password(password) && val_email(email))
+                {
+                    JSONObject test = new JSONObject();
+                    try {
+                        test.put("name", name);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        test.put("username", username);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        test.put("password", password);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        test.put("email", email);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                            (Request.Method.POST, url_register, test, new Response.Listener<JSONObject>() {
+
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    //message.setText("Response: " + response.toString());
+                                    //Log.i("tag", "test");
+
+
+                                    Intent intent = new Intent(getApplicationContext(), Login.class);
+                                    startActivity(intent);
+                                }
+                            }, new Response.ErrorListener() {
+
+                                //error message
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+
+                                    try {
+                                        if(error.networkResponse != null)
+                                        {
+                                            if(error.networkResponse.data != null)
+                                            {
+                                                message.setText("Error: " + new JSONObject(new String(error.networkResponse.data)));
+                                            }
+                                            else
+                                            {
+                                                message.setText(String.valueOf(error.networkResponse.statusCode));
+                                            }
+                                        }
+                                        else
+                                        {
+                                            message.setText("null");
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                }
+                            });
+
+                    // Access the RequestQueue through your singleton class.
+                //    RequestGate.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
+                }*/
+
 
             }
         });
@@ -158,19 +262,19 @@ public class Registration extends AppCompatActivity {
     }
     // validation of input fields
     private boolean val_email(String email) {
-        // tik viena eta zenkla
-        // ir pries ir po eta zenklo turi but po dvi raides
-        /*int count =0;
+       /* int count =0;
+        String specialCharacters = "[!#$%^&*(),?:{}|<>]";
+        boolean doesHaveSpecialC = email.matches(specialCharacters);
+
         for(int i=0; i<email.length(); i++)
         {
             if(i=='@' ){
-                if(Character.isLetter(email.charAt(i-3)) && Character.isLetter(email.charAt(i-2)) && Character.isLetter(email.charAt(i-1)) && Character.isLetter(email.charAt(i+2))
-                        && Character.isLetter(email.charAt(i+1)) && Character.isLetter(email.charAt(i+3))) {
+                if(Character.isLetter(email.charAt(i-1)) && Character.isLetter(email.charAt(i+1))) {
                     count++;
                 }
             }
         }
-        if (count==1 && email.length()>=5)
+        if (count==1 && doesHaveSpecialC==false)
             return true;
         else
             return false;*/
@@ -178,60 +282,53 @@ public class Registration extends AppCompatActivity {
     }
 
     private boolean val_password(String password) {
-        /*int countNumbers=0;
+       /* int countNumbers=0;
         int countSpecialSymbol=0;
-        for(int i=0; i<password.length(); i++)
-        {
-            if(Character.isDigit(password.charAt(i))) {
-                countNumbers++;
-            }
-            if(password.charAt(i) =='.' || password.charAt(i) =='!' || password.charAt(i) =='?'  ) {
-                countSpecialSymbol++;
-        }
+        String specialCharacters = "[0-9!@#$%^&*(),?:{}|<>]";
+        boolean doesHaveSpecialC = password.matches(specialCharacters);
 
-        }
-        if(password.length()>5 && (countNumbers>0 || countSpecialSymbol >0))
+        if(password.length()>5 && doesHaveSpecialC)//(countNumbers>0 || countSpecialSymbol >0))
         {
             return true;
         }
         else
             return false;*/
         return true;
-        //ilgesnis nei penki simboliai
-        // turi tureti arba bent viena skaiciu arba bent viena special simboli
-
     }
 
     // Validates that the username is more than 4 characters long
     private boolean val_username(String username) {
-        /*if(username.length() > 4)
+        if(username.length() > 4)
         {
             return true;
         }
-        return false;*/
-        return true;
+        return false;
+       // return true;
     }
 
     private boolean val_name(String name) {
         // ilgesnis nei dvi raides
         // negali but nei skaiciu nei simboliu
-        /*int countNumbers=0;
+        int countNumbers=0;
         int countSpecialSymbol=0;
-        for(int i=0; i<name.length(); i++) {
+        String specialCharacters = "[0-9!@#$%^&*(),?:{}|<>]";
+        boolean doesHaveSpecialC = name.matches(specialCharacters);
+
+        /*for(int i=0; i<name.length(); i++) {
             if (Character.isDigit(name.charAt(i))) {
                 countNumbers++;
             }
             if (name.charAt(i) == '.' || name.charAt(i) == '!' || name.charAt(i) == '?') {
                 countSpecialSymbol++;
             }
-        }
+        }*/
 
-        if(name.length()>2 && countNumbers==0 && countSpecialSymbol ==0)
+        if(name.length()>2 && doesHaveSpecialC==false)
         {
             return true;
         }
         else
-            return false;*/
-        return true;
+            return false;
+        //return true;
     }
 }

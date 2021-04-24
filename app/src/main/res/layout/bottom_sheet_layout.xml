@@ -18,12 +18,12 @@
         android:textSize="25sp" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName3"
+        android:id="@+id/friend_username_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name" />
+        android:text="Username" />
 
     <Button
         android:id="@+id/add_friend_button"

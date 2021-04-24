@@ -2,7 +2,7 @@ package com.ktu.vavadoge;
 
 import android.content.Intent;
 import android.os.Bundle;
-
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.Nullable;
 
 import com.android.volley.Request;
@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 
 /**
  * <p>A fragment that shows a list of items as a modal bottom sheet.</p>
@@ -79,7 +80,7 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
                             @Override
                             public void onErrorResponse(VolleyError error) {
 
-                                try {
+                                /*try {
                                     if(error.networkResponse != null)
                                     {
                                         if(error.networkResponse.data != null)
@@ -96,14 +97,14 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
                                         message.setText("null");
                                     }
                                 } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
+                                    e.printStackTrace();*/
+
 
                             }
                         });
 
                 // Access the RequestQueue through your singleton class.
-                RequestGate.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
+                RequestGate.getInstance(getActivity().getApplicationContext()).addToRequestQueue(jsonObjectRequest);
 
 
 

@@ -42,6 +42,21 @@ public class Profile extends AppCompatActivity {
         time = (TextView) findViewById(R.id.time_field);
 
 
+
+        Button OpenBottomSheet = findViewById(R.id.open_bottom_sheet_button);
+
+        OpenBottomSheet.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        BottomSheetDialog bottomSheet = new BottomSheetDialog();
+                        bottomSheet.show(getSupportFragmentManager(),
+                                "ModalBottomSheet");
+                    }
+                });
+
+
         JsonObjectRequest jsn = new JsonObjectRequest(Request.Method.GET, url_take_data, null, new Response.Listener<JSONObject>() {
             //assigns json object values to string and then to appropriate text box
             @Override

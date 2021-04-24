@@ -82,7 +82,7 @@ public class Login extends AppCompatActivity {
                                 //message.setText("Response: " + response.toString());
 
                                 // If the log in is successful, the user is taken to their profile
-                                Intent intent = new Intent(getApplicationContext(), Profile.class);
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
 
                             }

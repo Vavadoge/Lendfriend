@@ -31,6 +31,9 @@
         <activity
             android:name=".FriendsProfiles"
             android:theme="@style/Theme.Design.Light.NoActionBar"></activity>
+        <activity
+            android:name=".Debts"
+            android:theme="@style/Theme.Design.Light.NoActionBar"></activity>
 
 
         <meta-data

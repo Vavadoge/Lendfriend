@@ -2,6 +2,7 @@ package com.ktu.vavadoge;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,7 +29,7 @@ import java.util.List;
 
 public class FriendsProfiles extends AppCompatActivity {
 
-    Button button;
+    Button button, buttonDebt;
     ListView listView;
     String url_add_friend = "http://134.209.250.135:8080/user/friend";
 
@@ -173,7 +174,16 @@ public class FriendsProfiles extends AppCompatActivity {
                 RequestGate.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
             }
         });
-*/
+*/      buttonDebt = (Button) findViewById(R.id.buttonDebt);
+
+        buttonDebt.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Debts.class);
+                startActivity(intent);
+            }
+        });
         //  message.setText("null");
         JsonArrayRequest jsn = new JsonArrayRequest(Request.Method.GET, url_add_friend, null, new Response.Listener<JSONArray>() {
             //assigns json object values to string and then to appropriate text box

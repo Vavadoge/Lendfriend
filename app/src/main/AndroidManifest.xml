@@ -28,10 +28,10 @@
         <activity
             android:name=".Login"
             android:theme="@style/Theme.Design.Light.NoActionBar"></activity>
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".FriendsProfiles"
+            android:theme="@style/Theme.Design.Light.NoActionBar"></activity>
 
-
-        </activity>
 
         <meta-data
             android:name="preloaded_fonts"

@@ -1,4 +1,4 @@
-package com.ktu.vavadoge;
+/*package com.ktu.vavadoge;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,6 +29,7 @@ import org.json.JSONObject;
  *     ItemListDialogFragment.newInstance(30).show(getSupportFragmentManager(), "dialog");
  * </pre>
  */
+/*
 public class BottomSheetDialog extends BottomSheetDialogFragment {
 
     String username;
@@ -80,26 +81,39 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
                             @Override
                             public void onErrorResponse(VolleyError error) {
 
-                                /*try {
+                              /* // try {
                                     if(error.networkResponse != null)
                                     {
                                         if(error.networkResponse.data != null)
                                         {
-                                            message.setText("Error: " + new JSONObject(new String(error.networkResponse.data)));
+
+                                            Toast.makeText(getActivity(),
+                                                    new String(error.networkResponse.data), Toast.LENGTH_SHORT)
+                                                    .show();
                                         }
+                                            //message.setText("Error: " + new JSONObject(new String(error.networkResponse.data)));
+
                                         else
                                         {
-                                            message.setText(String.valueOf(error.networkResponse.statusCode));
+                                            Toast.makeText(getActivity(),String.valueOf(error.networkResponse.statusCode), Toast.LENGTH_SHORT)
+                                                    .show();
+                                           // message.setText(String.valueOf(error.networkResponse.statusCode));
                                         }
                                     }
                                     else
                                     {
-                                        message.setText("null");
+                                        Toast.makeText(getActivity(),
+                                                " ?? ", Toast.LENGTH_SHORT)
+                                                .show();
                                     }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();*/
+                                        //message.setText("null");*/
 
+                              //  }
+                            //   catch (JSONException e) {
+                              //     e.printStackTrace();
+                              // }
 
+/*
                             }
                         });
 
@@ -114,3 +128,4 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
         return v;
     }
 }
+*/

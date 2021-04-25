@@ -1,4 +1,4 @@
-package com.ktu.vavadoge;
+/*package com.ktu.vavadoge;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,4 +28,5 @@ public class MainActivity extends AppCompatActivity {
                 });
 
     }
-}
+}*/
+

@@ -1,6 +1,8 @@
 package com.ktu.vavadoge;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -50,16 +52,44 @@ public class Profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         logout = (Button) findViewById(R.id.logout_button);
         button = (Button) findViewById(R.id.open_bottom_sheet_button);
-        buttonFriends = (Button) findViewById(R.id.friendsList);
+        buttonFriends = (Button) findViewById(R.id.button);
         message = (TextView) findViewById(R.id.textView6);
-        name = (TextView)findViewById(R.id.profile_name_text);
-        email = (TextView)findViewById(R.id.profile_email_text);
-        test = (TextView) findViewById(R.id.username_field);
-        time = (TextView) findViewById(R.id.time_field);
-        testing = (TextView) findViewById(R.id.textView11);
+        name = findViewById(R.id.profile_name_text);
+        email = findViewById(R.id.profile_email_text);
+        test = findViewById(R.id.username_field);
+        time = findViewById(R.id.time_field);
+        testing = findViewById(R.id.textView11);
 
 
         input_otherUser = (EditText) findViewById(R.id.editTextTextPersonName3);
+
+
+
+        //List
+
+        MyListData[] myListData = new MyListData[] {
+                new MyListData("Benas", R.drawable.avatar1),
+                new MyListData("Rugilė", R.drawable.avatar2),
+                new MyListData("Arnas", R.drawable.avatar3),
+                new MyListData("Ugnė", R.drawable.avatar2),
+                new MyListData("Gabija", R.drawable.avatar2),
+                new MyListData("Džesika", R.drawable.avatar2),
+                new MyListData("Neringa", R.drawable.avatar2),
+                new MyListData("Deividas", R.drawable.avatar1),
+                new MyListData("Karolis", R.drawable.avatar3),
+                new MyListData("Nedas", R.drawable.avatar3),
+        };
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        MyListAdapter adapter = new MyListAdapter(myListData);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+
+
+
+
+        //
+
 
 
 

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp" >
+    <EditText
+        android:id="@+id/friendsName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/listView"
+        android:layout_marginTop="20dp"
+        android:visibility="invisible"
+        android:hint="Friends' username" />
+
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="439dp"></ListView>
+
+    <Button
+        android:id="@+id/buttonFriend"
+        android:layout_width="96dp"
+        android:visibility="invisible"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/listView"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="24dp" />
+
+    <Button
+        android:id="@+id/buttonDebt"
+        android:layout_width="96dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/listView"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="128dp"
+        android:layout_marginRight="38dp"
+        android:backgroundTint="@color/third"
+        android:fontFamily="@font/abeezee"
+        android:shadowColor="@color/first"
+        android:text="To debt page"
+        android:textColor="@color/white"/>
+</RelativeLayout>
+
+
+

@@ -32,12 +32,12 @@ public class Login extends AppCompatActivity {
     TextView message, sign_up;
     Button button;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //
         button = (Button) findViewById(R.id.button_login);
         input_username = (EditText) findViewById(R.id.editTextTextPersonName);
         input_password = (EditText) findViewById(R.id.editTextTextPassword);
@@ -83,6 +83,7 @@ public class Login extends AppCompatActivity {
 
                                 // If the log in is successful, the user is taken to their profile
                                 Intent intent = new Intent(getApplicationContext(), Profile.class);
+                               // Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
 
                             }

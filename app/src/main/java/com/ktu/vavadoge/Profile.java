@@ -40,12 +40,15 @@ public class Profile extends AppCompatActivity {
 
     EditText input_otherUser;
 
-    String otherName;
+   // String usernames;
+
+    private static String otherName;
     public ArrayList<String> arrayList = new ArrayList<>();
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    //protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         logout = (Button) findViewById(R.id.logout_button);
@@ -57,6 +60,7 @@ public class Profile extends AppCompatActivity {
         test = (TextView) findViewById(R.id.username_field);
         time = (TextView) findViewById(R.id.time_field);
         testing = (TextView) findViewById(R.id.textView11);
+
 
 
         input_otherUser = (EditText) findViewById(R.id.editTextTextPersonName3);
@@ -77,34 +81,23 @@ public class Profile extends AppCompatActivity {
                                 "ModalBottomSheet");
                     }
                 });
+        */
 
-*/
         JsonObjectRequest jsn = new JsonObjectRequest(Request.Method.GET, url_take_data, null, new Response.Listener<JSONObject>() {
             //assigns json object values to string and then to appropriate text box
             @Override
             public void onResponse(JSONObject response) {
                 //message.setText("Response2: " + response.toString());
-
+                String names = null;
                 String usernames = null;
+                String emails= null;
+                String time_value = null;
+               // usernames = null;
                 try {
                     usernames = response.getString("username");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                String names = null;
-                try {
+                    UserProfile.setName(usernames);
                     names = response.getString("name");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                String emails= null;
-                try {
                     emails = response.getString("email");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                String time_value = null;
-                try {
                     time_value = response.getString("created_at");
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -199,7 +192,13 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), FriendsProfiles.class);
+
+                Bundle b = new Bundle();
+                b.putString("username", name.toString());
+                intent.putExtra("person",b);
+
                 startActivity(intent);
+
             }
         });
         button.setOnClickListener(new View.OnClickListener() {

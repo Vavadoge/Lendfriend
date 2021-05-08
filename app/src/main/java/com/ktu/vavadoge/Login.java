@@ -31,6 +31,7 @@ public class Login extends AppCompatActivity {
     EditText input_username, input_password;
     TextView message, sign_up;
     Button button;
+    TextView username_er, password_er;
 
 
     @Override
@@ -43,6 +44,8 @@ public class Login extends AppCompatActivity {
         input_password = (EditText) findViewById(R.id.editTextTextPassword);
         message = (TextView) findViewById(R.id.textView4);
         sign_up = (TextView) findViewById(R.id.sign_up);
+        password_er = (TextView) findViewById(R.id.textView7);
+        username_er = (TextView) findViewById(R.id.textView6);
 
         sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,12 +68,16 @@ public class Login extends AppCompatActivity {
                 JSONObject test = new JSONObject();
                 try {
                     test.put("username", username);
+                    username_er.setText("");
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    username_er.setText("invalid username");
                 }
                 try {
                     test.put("password", password);
+                    password_er.setText("");
                 } catch (JSONException e) {
+                    username_er.setText("invalid password");
                     e.printStackTrace();
                 }
 
@@ -79,7 +86,7 @@ public class Login extends AppCompatActivity {
 
                             @Override
                             public void onResponse(JSONObject response) {
-                                //message.setText("Response: " + response.toString());
+                                                                                       //message.setText("Response: " + response.toString());
 
                                 // If the log in is successful, the user is taken to their profile
                                 Intent intent = new Intent(getApplicationContext(), Profile.class);

@@ -14,10 +14,11 @@
         android:hint="Friends' username" />
 
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listView"
         android:layout_width="375dp"
-        android:layout_height="336dp"></ListView>
+        android:layout_height="336dp"
+     />
 
     <Button
         android:id="@+id/buttonFriend"
@@ -42,15 +43,6 @@
         android:shadowColor="@color/first"
         android:text="To debt page"
         android:textColor="@color/white"/>
-
-    <ListView
-        android:id="@+id/appendingFriends"
-        android:layout_width="395dp"
-        android:layout_height="179dp"
-        android:layout_below="@+id/listView"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="216dp"
-        android:layout_marginEnd="0dp" />
 
     <TextView
         android:id="@+id/textView14"

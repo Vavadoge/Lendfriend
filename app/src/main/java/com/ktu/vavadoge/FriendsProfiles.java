@@ -23,6 +23,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,8 +40,9 @@ public class FriendsProfiles extends AppCompatActivity {
 
     Button button, buttonDebt;
     RecyclerView listView,listViewNotFriends;
-    String url_add_friend = "http://134.209.250.135:8080/user/friend-request";
-
+    String url_add_friend = "http://134.209.250.135:8080/user/friend-request?self=true";
+    String url_check_friends = "http://134.209.250.135:8080/user/friend";
+    String url_check_friend_requests = "http://134.209.250.135:8080/user/friend-request";
     ArrayList<String> arrayListFriends = new ArrayList<>();
     List<String> listFriends = new LinkedList<>();
     ArrayList<String> arrayListNotFriendsSent = new ArrayList<>();
@@ -60,10 +63,10 @@ public class FriendsProfiles extends AppCompatActivity {
         setContentView(R.layout.activity_friends);
         button = (Button) findViewById(R.id.buttonFriend);
         //button = (Button) findViewById(R.id.friendsList);
-        listView= (RecyclerView) findViewById(R.id.listView);
+        listView = (RecyclerView) findViewById(R.id.listView);
 //        listViewNotFriends =(RecyclerView) findViewById(R.id.appendingFriends);
         input_otherUser = (EditText) findViewById(R.id.friendsName);
-             buttonDebt = (Button) findViewById(R.id.buttonDebt);
+        buttonDebt = (Button) findViewById(R.id.buttonDebt);
 
 
         buttonDebt.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +79,104 @@ public class FriendsProfiles extends AppCompatActivity {
                 startActivity(intent1);
 
             }
+        });
+        JsonArrayRequest jsn2 = new JsonArrayRequest(Request.Method.GET, url_check_friend_requests, null, new Response.Listener<JSONArray>() {
+            //assigns json object values to string and then to appropriate text box
+            @Override
+            public void onResponse(JSONArray response) {
+
+                String xx = "";
+                xx = response.toString(); //("username");
+                // String countryList[];
+                for (int i = 0; i < response.length(); i++) {
+                    JSONObject jresponse = null;
+                    try {
+                        jresponse = response.getJSONObject(i);
+
+                        String nickname = jresponse.getString("friend");
+                        String first = jresponse.getString("owner");
+                        String status = jresponse.getString("accepted");
+                        friends.add(new UserFriend(first, status, "received"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            //error message
+            @Override
+            public void onErrorResponse(VolleyError error) {
+//
+//                try {
+//                    if(error.networkResponse != null)
+//                    {
+//                        if(error.networkResponse.data != null)
+//                        {
+//                            message.setText("Error: " + new JSONObject(new String(error.networkResponse.data)));
+//                        }
+//                        else
+//                        {
+//                            message.setText(String.valueOf(error.networkResponse.statusCode));
+//                        }
+//                    }
+//                    else
+//                    {
+//                        message.setText("null");
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+            }
+
+        });
+        JsonArrayRequest jsn1 = new JsonArrayRequest(Request.Method.GET, url_check_friends, null, new Response.Listener<JSONArray>() {
+            //assigns json object values to string and then to appropriate text box
+            @Override
+            public void onResponse(JSONArray response) {
+
+                String xx = "";
+                xx = response.toString(); //("username");
+                // String countryList[];
+                for (int i = 0; i < response.length(); i++) {
+                    JSONObject jresponse = null;
+                    try {
+                        jresponse = response.getJSONObject(i);
+
+                        String nickname = jresponse.getString("friend");
+                        String first = jresponse.getString("owner");
+                        String status = jresponse.getString("accepted");
+                        friends.add(new UserFriend(nickname, status, "friend"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            //error message
+            @Override
+            public void onErrorResponse(VolleyError error) {
+//
+//                try {
+//                    if(error.networkResponse != null)
+//                    {
+//                        if(error.networkResponse.data != null)
+//                        {
+//                            message.setText("Error: " + new JSONObject(new String(error.networkResponse.data)));
+//                        }
+//                        else
+//                        {
+//                            message.setText(String.valueOf(error.networkResponse.statusCode));
+//                        }
+//                    }
+//                    else
+//                    {
+//                        message.setText("null");
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+            }
+
         });
         //  message.setText("null");
         JsonArrayRequest jsn = new JsonArrayRequest(Request.Method.GET, url_add_friend, null, new Response.Listener<JSONArray>() {
@@ -97,27 +198,9 @@ public class FriendsProfiles extends AppCompatActivity {
 
 
                             String username = UserProfile.getName();
-                            if ( status=="false" )
-                            {
-                                if (first.equals(username))
-                                {
-                                    friends.add(new UserFriend(nickname, status,"sent"));
-                                 //   arrayListNotFriendsSent.add(nickname);
-                                   // listNotFriendsSent.add(nickname);
-                                }
-                                else
-                                {
-                                    friends.add(new UserFriend(first, status,"received"));
-                                 //   arrayListNotFriendsReceived.add(first);
-                                 //   listNotFriendsReceived.add(first);
-                                }
-                            }
-                            else
-                            {
-                                friends.add(new UserFriend(first, status,"friend"));
-                              //  arrayListFriends.add(nickname);
-                            //    listFriends.add(nickname);
-                            }
+
+                            friends.add(new UserFriend(nickname, status,"sent"));
+
                     }
                     catch (JSONException e) {
                         e.printStackTrace();
@@ -166,6 +249,23 @@ public class FriendsProfiles extends AppCompatActivity {
             //error message
             @Override
             public void onErrorResponse(VolleyError error) {
+                if(friends.size()>0)
+                {
+
+                    // set up the RecyclerView
+                    UserFriend [] friendList1 = friends.toArray(new UserFriend[friends.size()]);
+                    RecyclerView recyclerView = findViewById(R.id.listView);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    FriendsAdapter arrayAdapter = new FriendsAdapter(getApplicationContext(), friendList1);
+                    recyclerView.setAdapter(arrayAdapter);
+
+                    //FriendsAdapter(getApplicationContext(), R.layout.activity_viewlist, R.id.tekstukas, friendList1);
+
+
+                    // ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), R.layout.activity_viewlist, R.id.tekstukas, friendList1);
+                    // ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_friends, R.id.textView, arrayList);
+                }
+                int i = 0;
 //
 //                try {
 //                    if(error.networkResponse != null)
@@ -189,6 +289,8 @@ public class FriendsProfiles extends AppCompatActivity {
             }
 
         });
+        RequestGate.getInstance(getApplicationContext()).addToRequestQueue(jsn2);
+        RequestGate.getInstance(getApplicationContext()).addToRequestQueue(jsn1);
         RequestGate.getInstance(getApplicationContext()).addToRequestQueue(jsn);
 
 
@@ -281,7 +383,6 @@ public class FriendsProfiles extends AppCompatActivity {
             // contents of the view with that element
             if(localDataSet[position].getType().equals("received"))
             {
-
                 viewHolder.getAddBtn().setVisibility(View.VISIBLE);
                 viewHolder.getDeleteBtn().setVisibility(View.VISIBLE);
                 viewHolder.getTextView().setText((CharSequence) localDataSet[position].getUsername());
@@ -299,8 +400,38 @@ public class FriendsProfiles extends AppCompatActivity {
 
             viewHolder.getAddBtn().setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    int a = 8;
-                    // Code here executes on main thread after user presses button
+
+
+                    int row = viewHolder.getAdapterPosition();
+                    String username = localDataSet[row].getUsername();
+                    String url_patch = "http://134.209.250.135:8080/user/friend-request/";
+                    url_patch += username;
+                    StringRequest stringRequest = new StringRequest
+                            (Request.Method.PATCH, url_patch, new Response.Listener<String>() {
+
+                                @Override
+                                public void onResponse(String response) {
+                                    //Kazka gal isvest i ekrana kad pridejo
+
+                                    viewHolder.addBtn.setVisibility(View.GONE);
+//                                    viewHolder.textFriend.setText("Added friend");
+//                                    viewHolder.textFriend.setVisibility(View.VISIBLE);
+//                                    viewHolder.notify();
+                                }
+                            }, new Response.ErrorListener() {
+
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    // Kazka pasakyt kad nejo prideti
+
+                                    int a = 5;
+                                }
+                            });
+
+                    // Access the RequestQueue through your singleton class.
+                    RequestGate.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+
+
                 }
             });
         }

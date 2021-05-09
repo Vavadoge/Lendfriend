@@ -28,7 +28,7 @@ public class Profile extends AppCompatActivity {
     Button logout, button, buttonFriends;
     String url_logout = "http://134.209.250.135:8080/user/logout";
     String url_take_data = "http://134.209.250.135:8080/user/self";
-    String url_add_friend = "http://134.209.250.135:8080/user/friend-request";
+    String url_add_friend = "http://134.209.250.135:8080/user/friend-request?self=true";
 
     TextView message;
     TextView name;

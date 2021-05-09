@@ -79,54 +79,33 @@ public class FriendsProfiles extends AppCompatActivity {
                 for(int i = 0; i < response.length(); i++){
                     JSONObject jresponse = null;
                     try {
-                        jresponse = response.getJSONObject(i);
+                            jresponse = response.getJSONObject(i);
 
-                        String nickname = jresponse.getString("second_user");
-                        String first = jresponse.getString("first_user");
-                        String  status = jresponse.getString("status");
-                        //Profile profile = new Profile();
-                        String  vardas;// = profile.test.toString();
-                        Intent inten = getIntent();
-                        vardas = inten.getStringExtra("name");
-                        String username = UserProfile.getName();
-                        if ( status=="false" )
-                        {
-                            if (first.equals(username))
+                            String nickname = jresponse.getString("second_user");
+                            String first = jresponse.getString("first_user");
+                            String  status = jresponse.getString("status");
+
+                            String username = UserProfile.getName();
+                            if ( status=="false" )
                             {
-                                arrayListNotFriendsSent.add(nickname);
-                                listNotFriendsSent.add(nickname);
+                                if (first.equals(username))
+                                {
+                                    arrayListNotFriendsSent.add(nickname);
+                                    listNotFriendsSent.add(nickname);
+                                }
+                                else
+                                {
+                                    arrayListNotFriendsReceived.add(first);
+                                    listNotFriendsReceived.add(first);
+                                }
                             }
                             else
                             {
-                                arrayListNotFriendsReceived.add(first);
-                                listNotFriendsReceived.add(first);
+                                arrayListFriends.add(nickname);
+                                listFriends.add(nickname);
                             }
-                        }
-                        else
-                        {
-                            arrayListFriends.add(nickname);
-                            listFriends.add(nickname);
-                        }
-
-                     //   Log.d("second_user", nickname);
-                     //   if(usernameProfile !=nickname) {
-
-                            //countryListnickname;
-                      //  }
-
-                       /* if(usernameProfile !=nickname) {
-                            arrayList.add(nickname);
-                            list.add(nickname);
-                            //countryListnickname;
-                        }
-
-                        if(usernameProfile !=first_user) {
-                            arrayList.add(first_user);
-                            list.add(first_user);
-                            //countryListnickname;
-                        }
-*/
-                    } catch (JSONException e) {
+                    }
+                    catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
@@ -147,7 +126,7 @@ public class FriendsProfiles extends AppCompatActivity {
                     listNotFriendsReceived.toArray(listA);
 
 
-                    ArrayAdapter arrayAdapter1 = new ArrayAdapter(getApplicationContext(), R.layout.activity_viewlist, R.id.tekstukas, listA);
+                    ArrayAdapter arrayAdapter1 = new ArrayAdapter(getApplicationContext(), R.layout.activity_viewlist_notfriends, R.id.notFriendsView, listA);
                     // ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_friends, R.id.textView, arrayList);
                     listViewNotFriends.setAdapter(arrayAdapter1);
                 }

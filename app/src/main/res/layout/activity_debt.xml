@@ -25,7 +25,7 @@
         android:text="Create new debt"
         android:textColor="@color/white"
         android:textColorLink="@color/second"
-        android:textSize="18sp"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view4" />
@@ -58,10 +58,10 @@
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="Debt's amount"
+        android:layout_marginTop="32dp"
+        android:text="Debt's information"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.149"
+        app:layout_constraintHorizontal_bias="0.161"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName4" />
 
@@ -71,7 +71,7 @@
         android:layout_height="39dp"
         android:layout_marginTop="12dp"
         android:ems="10"
-        android:hint="Amount"
+        android:hint="Information"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.326"

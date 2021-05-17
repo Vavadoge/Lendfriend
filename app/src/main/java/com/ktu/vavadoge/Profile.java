@@ -22,6 +22,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Profile extends AppCompatActivity {
 
@@ -60,15 +62,8 @@ public class Profile extends AppCompatActivity {
         test = (TextView) findViewById(R.id.username_field);
         time = (TextView) findViewById(R.id.time_field);
         testing = (TextView) findViewById(R.id.textView11);
-
-
-
         input_otherUser = (EditText) findViewById(R.id.editTextTextPersonName3);
-
-
-
-
-       /* Button OpenBottomSheet = findViewById(R.id.open_bottom_sheet_button);
+        /* Button OpenBottomSheet = findViewById(R.id.open_bottom_sheet_button);
 
         OpenBottomSheet.setOnClickListener(
                 new View.OnClickListener() {
@@ -92,20 +87,21 @@ public class Profile extends AppCompatActivity {
                 String usernames = null;
                 String emails= null;
                 String time_value = null;
-               // usernames = null;
                 try {
                     usernames = response.getString("username");
                     UserProfile.setName(usernames);
                     names = response.getString("name");
                     emails = response.getString("email");
                     time_value = response.getString("created_at");
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 name.setText(names);
                 email.setText(emails);
                 test.setText(usernames);
-                time.setText(time_value);
+                time.setText(time_value.substring(0,10));
+              // "[0-9]{4}+\-[0-9]{2}\-[0-9]{2}"
 
             }
         }, new Response.ErrorListener() {

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/button_main_friends"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="128dp"
+        android:gravity="center"
+        android:backgroundTint="@color/third"
+        android:fontFamily="@font/abeezee"
+        android:shadowColor="@color/first"
+        android:text="Friends"
+        android:textColor="@color/white"
+        android:textColorHighlight="@color/third"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_main_debts"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/third"
+        android:fontFamily="@font/abeezee"
+        android:shadowColor="@color/first"
+        android:text="Debts"
+        android:textColor="@color/white"
+        android:textColorHighlight="@color/third"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_main_friends" />
+
+    <Button
+        android:id="@+id/button_main_myprofile"
+        android:layout_marginTop="15dp"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:backgroundTint="@color/third"
+        android:fontFamily="@font/abeezee"
+        android:shadowColor="@color/first"
+        android:text="Profile"
+        android:textColor="@color/white"
+        android:textColorHighlight="@color/third"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_main_debts" />
+
+    <Button
+        android:id="@+id/button_main_add_friend"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/third"
+        android:fontFamily="@font/abeezee"
+        android:shadowColor="@color/first"
+        android:text="Add friend"
+        android:textColor="@color/white"
+        android:textColorHighlight="@color/third"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_main_myprofile" />
+
+    <Button
+        android:id="@+id/button_main_logout"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/second"
+        android:fontFamily="@font/abeezee"
+        android:shadowColor="@color/first"
+        android:text="Log out"
+        android:textColor="@color/white"
+        android:textColorHighlight="@color/third"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_main_add_friend" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_add"
+        app:fabSize="normal"
+        android:backgroundTint="@color/first"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

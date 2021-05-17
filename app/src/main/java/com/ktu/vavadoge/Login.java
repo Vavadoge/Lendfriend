@@ -68,16 +68,16 @@ public class Login extends AppCompatActivity {
                 JSONObject test = new JSONObject();
                 try {
                     test.put("username", username);
-                    username_er.setText("");
+                    //username_er.setText("");
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    username_er.setText("invalid username");
+                 //   username_er.setText("invalid username");
                 }
                 try {
                     test.put("password", password);
-                    password_er.setText("");
+                //    password_er.setText("");
                 } catch (JSONException e) {
-                    username_er.setText("invalid password");
+                  //  username_er.setText("invalid password");
                     e.printStackTrace();
                 }
 
@@ -89,9 +89,11 @@ public class Login extends AppCompatActivity {
                                                                                        //message.setText("Response: " + response.toString());
 
                                 // If the log in is successful, the user is taken to their profile
-                                Intent intent = new Intent(getApplicationContext(), Profile.class);
-                               // Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                               // Intent intent = new Intent(getApplicationContext(), Profile.class);
+                              //  Intent intent = new Intent(getApplicationContext(), Profile.class);
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
+                                finish();
 
                             }
                         }, new Response.ErrorListener() {
@@ -100,6 +102,7 @@ public class Login extends AppCompatActivity {
                             public void onErrorResponse(VolleyError error) {
                                 // TODO: Handle error
                                 //error.printStackTrace();
+                                password_er.setText("Invalid username or password");
 
                                 try {
                                     if(error.networkResponse != null)
@@ -126,7 +129,6 @@ public class Login extends AppCompatActivity {
 
                 // Access the RequestQueue through your singleton class.
                 RequestGate.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
-
 
 
 

@@ -80,43 +80,7 @@ public class Registration extends AppCompatActivity {
                 password = input_password.getText().toString();
                 email = input_email.getText().toString();
 
-                //if all validation is correct then puts all the input values to json object
 
-           /*     if(val_name(name)==false)
-                {
-                    name_er.setText("name is not valid");
-                }
-                email = input_email.getText().toString();
-                if(val_name(name))
-                {
-                    name_er.setText("");
-                }
-                if(val_email(email)==false)
-                {
-                    email_er.setText("email is not valid");
-                }
-                if(val_email(email))
-                {
-                    email_er.setText("");
-                }
-                if(val_password(password)==false)
-                {
-                    password_er.setText("password is not valid");
-                }
-                if(val_password(password))
-                {
-                    password_er.setText("");
-                }
-                if(val_username(username)==false)
-                {
-                    username_er.setText("username is not valid");
-                }
-                if(val_username(username))
-                {
-                    username_er.setText("");
-                }
-
-            */
                 boolean kazkas =true;
                 if(val_name(name) |  val_username(username) | val_password(password) | val_email(email))
                 {
@@ -196,29 +160,32 @@ public class Registration extends AppCompatActivity {
     }
     // validation of input fields
     private boolean val_email(String email) {
-        int count =0;
-        String specialCharacters = "[!#$%^&*(),?:{}|<>]";
-        boolean doesHaveSpecialC = Pattern.matches(specialCharacters,email); //email.matches(specialCharacters);
+        int count = 0;
+        int index = -1;
+        String specialCharacters = "^(?=.*[!#$%^&*(),?:{}|<>]).{5,30}$";
+        boolean doesHaveSpecialC = email.matches(specialCharacters); //email.matches(specialCharacters);
 
         for(int i=0; i<email.length(); i++)
         {
-            if(i=='@' ){
-                if(Character.isLetter(email.charAt(i-1)) && Character.isLetter(email.charAt(i+1))) {
-                    count++;
-                }
+            if(email.charAt(i)=='@'){
+
+                count++;
+                index=i;
             }
         }
-        if (count==1 && doesHaveSpecialC==false) {
+        int pr = index + 1;
+        int pab = email.length() - (index+1);
+        if (count==1 && doesHaveSpecialC==false && email.length() > 5 && pr>1 && pab>1 ) {
             email_er.setText("");
             return true;
         }
         else {
             if(email.isEmpty())
             {
-                email_er.setText("password's field can not be empty'");
+                email_er.setText("email's field can not be empty'");
                 return false;
             }
-            email_er.setText("password is not valid");
+            email_er.setText("email is not valid");
             return false;
         }
        // return true;
@@ -227,11 +194,10 @@ public class Registration extends AppCompatActivity {
     private boolean val_password(String password) {
         int countNumbers=0;
         int countSpecialSymbol=0;
-        String specialCharacters = "[0-9!@#$%^&*(),?:{}|<>]";
+        String specialCharacters = "^(?=.*[0-9!@#$%^&*(),.?:{}|<>\\.]).{5,15}$";
+        boolean doesHaveSpecialC = password.matches(specialCharacters);
 
-        boolean doesHaveSpecialC =  Pattern.matches(specialCharacters,password);//password.matches(specialCharacters);
-
-        if(password.length()>5 && doesHaveSpecialC)//(countNumbers>0 || countSpecialSymbol >0))
+        if(doesHaveSpecialC == true)
         {
             password_er.setText("");
             return true;
@@ -240,9 +206,11 @@ public class Registration extends AppCompatActivity {
             if(password.isEmpty())
             {
                 password_er.setText("password's field can not be empty'");
+                //password_er.setText(password);
                 return false;
             }
             password_er.setText("password is not valid");
+            //password_er.setText(password);
             return false;
         }
         //return true;
@@ -273,19 +241,11 @@ public class Registration extends AppCompatActivity {
     private boolean val_name(String name) {
         int countNumbers=0;
         int countSpecialSymbol=0;
-        String specialCharacters = "[0-9!@#$%^&*(),?:{}|<>]";
+        String specialCharacters = "^(?=.*[0-9!@#$%^&*(),.?:{}|<>\\.]).{2,15}$";
         boolean doesHaveSpecialC = name.matches(specialCharacters);
 
-        /*for(int i=0; i<name.length(); i++) {
-            if (Character.isDigit(name.charAt(i))) {
-                countNumbers++;
-            }
-            if (name.charAt(i) == '.' || name.charAt(i) == '!' || name.charAt(i) == '?') {
-                countSpecialSymbol++;
-            }
-        }*/
 
-        if(name.length()>2 && doesHaveSpecialC==false)
+        if(name.length()>1 && doesHaveSpecialC==false)
         {
             name_er.setText("");
             return true;
@@ -299,6 +259,5 @@ public class Registration extends AppCompatActivity {
             name_er.setText("name is not valid");
             return false;
         }
-      //  return true;
     }
 }

@@ -13,28 +13,35 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Vavadoge"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Profile"
-            android:theme="@style/Theme.Design.Light.NoActionBar"></activity>
+
         <activity
-            android:name=".Registration"
+            android:name=".Profile"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
+            android:name=".Login"
             android:theme="@style/Theme.Design.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+
         <activity
-            android:name=".Login"
-            android:theme="@style/Theme.Design.Light.NoActionBar"></activity>
+            android:name=".Registration"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+
         <activity
             android:name=".FriendsProfiles"
-            android:theme="@style/Theme.Design.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
             android:name=".Debts"
-            android:theme="@style/Theme.Design.Light.NoActionBar"></activity>
-
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
+            android:name=".AddingFriend"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
 
         <meta-data
             android:name="preloaded_fonts"

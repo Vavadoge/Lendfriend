@@ -25,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,7 +39,7 @@ import java.util.List;
 
 public class FriendsProfiles extends AppCompatActivity {
 
-    Button button, buttonDebt;
+   // Button button, buttonDebt;
     RecyclerView listView,listViewNotFriends;
     String url_add_friend = "http://134.209.250.135:8080/user/friend-request?self=true";
     String url_check_friends = "http://134.209.250.135:8080/user/friend";
@@ -50,9 +51,8 @@ public class FriendsProfiles extends AppCompatActivity {
     ArrayList<String> arrayListNotFriendsReceived = new ArrayList<>();
     List<String> listNotFriendsReceived = new LinkedList<>();
     ArrayList<UserFriend> friends = new ArrayList<>();
-
-
-
+    TextView textInvite,textView_invite_action;//quote,
+    FloatingActionButton fab;
     EditText input_otherUser;
 
     String otherName;
@@ -61,15 +61,40 @@ public class FriendsProfiles extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
-        button = (Button) findViewById(R.id.buttonFriend);
+      //  button = (Button) findViewById(R.id.buttonFriend);
         //button = (Button) findViewById(R.id.friendsList);
         listView = (RecyclerView) findViewById(R.id.listView);
 //        listViewNotFriends =(RecyclerView) findViewById(R.id.appendingFriends);
-        input_otherUser = (EditText) findViewById(R.id.friendsName);
-        buttonDebt = (Button) findViewById(R.id.buttonDebt);
+       // input_otherUser = (EditText) findViewById(R.id.friendsName);
+     //   buttonDebt = (Button) findViewById(R.id.buttonDebt);
+    //    quote =  (TextView) findViewById(R.id.textview_friends_quote);
+        textInvite =  (TextView) findViewById(R.id.textView_friends_invite);
+        textView_invite_action =  (TextView) findViewById(R.id.textView_friends_invite_action);
+        textView_invite_action.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AddingFriend.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        fab = (FloatingActionButton) findViewById(R.id.home_friends_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                //      .setAction("Action", null).show();
+            }
+        });
 
 
-        buttonDebt.setOnClickListener(new View.OnClickListener() {
+     /*
+
+*/
+
+      /*  buttonDebt.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -79,7 +104,7 @@ public class FriendsProfiles extends AppCompatActivity {
                 startActivity(intent1);
 
             }
-        });
+        });*/
         JsonArrayRequest jsn2 = new JsonArrayRequest(Request.Method.GET, url_check_friend_requests, null, new Response.Listener<JSONArray>() {
             //assigns json object values to string and then to appropriate text box
             @Override
@@ -206,10 +231,15 @@ public class FriendsProfiles extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+
                 if(friends.size()>0)
                 {
+                    //quote.setVisibility(View.GONE);
+                    textInvite.setVisibility(View.GONE);
+                    textView_invite_action.setVisibility(View.GONE);
 
                     // set up the RecyclerView
+
                     UserFriend [] friendList1 = friends.toArray(new UserFriend[friends.size()]);
                     RecyclerView recyclerView = findViewById(R.id.listView);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -305,6 +335,7 @@ public class FriendsProfiles extends AppCompatActivity {
         //    listView.setAdapter(arrayAdapter);
 
     }
+
     public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHolder> {
 
         private UserFriend[] localDataSet;

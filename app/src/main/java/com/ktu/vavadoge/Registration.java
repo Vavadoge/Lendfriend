@@ -28,6 +28,7 @@ import java.net.URL;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 
 import javax.net.ssl.SSLContext;
 
@@ -79,8 +80,9 @@ public class Registration extends AppCompatActivity {
                 password = input_password.getText().toString();
                 email = input_email.getText().toString();
 
-                //if all validation is correct then puts all the input values to json object
-                if(val_name(name) && val_username(username) && val_password(password) && val_email(email))
+
+                boolean kazkas =true;
+                if(val_name(name) |  val_username(username) | val_password(password) | val_email(email))
                 {
                     JSONObject test = new JSONObject();
                     try {
@@ -158,45 +160,60 @@ public class Registration extends AppCompatActivity {
     }
     // validation of input fields
     private boolean val_email(String email) {
-        // tik viena eta zenkla
-        // ir pries ir po eta zenklo turi but po dvi raides
-        /*int count =0;
+        int count = 0;
+        int index = -1;
+        String specialCharacters = "^(?=.*[!#$%^&*(),?:{}|<>]).{5,30}$";
+        boolean doesHaveSpecialC = email.matches(specialCharacters); //email.matches(specialCharacters);
+
         for(int i=0; i<email.length(); i++)
         {
-            if(i=='@' ){
-                if(Character.isLetter(email.charAt(i-3)) && Character.isLetter(email.charAt(i-2)) && Character.isLetter(email.charAt(i-1)) && Character.isLetter(email.charAt(i+2))
-                        && Character.isLetter(email.charAt(i+1)) && Character.isLetter(email.charAt(i+3))) {
-                    count++;
-                }
+            if(email.charAt(i)=='@'){
+
+                count++;
+                index=i;
             }
         }
-        if (count==1 && email.length()>=5)
+        int pr = index + 1;
+        int pab = email.length() - (index+1);
+        if (count==1 && doesHaveSpecialC==false && email.length() > 5 && pr>1 && pab>1 ) {
+            email_er.setText("");
             return true;
-        else
-            return false;*/
-        return true;
+        }
+        else {
+            if(email.isEmpty())
+            {
+                email_er.setText("email's field can not be empty'");
+                return false;
+            }
+            email_er.setText("email is not valid");
+            return false;
+        }
+       // return true;
     }
 
     private boolean val_password(String password) {
-        /*int countNumbers=0;
+        int countNumbers=0;
         int countSpecialSymbol=0;
-        for(int i=0; i<password.length(); i++)
-        {
-            if(Character.isDigit(password.charAt(i))) {
-                countNumbers++;
-            }
-            if(password.charAt(i) =='.' || password.charAt(i) =='!' || password.charAt(i) =='?'  ) {
-                countSpecialSymbol++;
-        }
+        String specialCharacters = "^(?=.*[0-9!@#$%^&*(),.?:{}|<>\\.]).{5,15}$";
+        boolean doesHaveSpecialC = password.matches(specialCharacters);
 
-        }
-        if(password.length()>5 && (countNumbers>0 || countSpecialSymbol >0))
+        if(doesHaveSpecialC == true)
         {
+            password_er.setText("");
             return true;
         }
-        else
-            return false;*/
-        return true;
+        else {
+            if(password.isEmpty())
+            {
+                password_er.setText("password's field can not be empty'");
+                //password_er.setText(password);
+                return false;
+            }
+            password_er.setText("password is not valid");
+            //password_er.setText(password);
+            return false;
+        }
+        //return true;
         //ilgesnis nei penki simboliai
         // turi tureti arba bent viena skaiciu arba bent viena special simboli
 
@@ -204,34 +221,43 @@ public class Registration extends AppCompatActivity {
 
     // Validates that the username is more than 4 characters long
     private boolean val_username(String username) {
-        /*if(username.length() > 4)
+        if(username.length() > 4)
         {
+            username_er.setText("");
             return true;
         }
-        return false;*/
-        return true;
+        else {
+            if(username.isEmpty())
+            {
+                username_er.setText("username's field can not be empty'");
+                return false;
+            }
+            username_er.setText("username is not valid");
+            return false;
+        }
+       // return true;
     }
 
     private boolean val_name(String name) {
-        // ilgesnis nei dvi raides
-        // negali but nei skaiciu nei simboliu
-        /*int countNumbers=0;
+        int countNumbers=0;
         int countSpecialSymbol=0;
-        for(int i=0; i<name.length(); i++) {
-            if (Character.isDigit(name.charAt(i))) {
-                countNumbers++;
-            }
-            if (name.charAt(i) == '.' || name.charAt(i) == '!' || name.charAt(i) == '?') {
-                countSpecialSymbol++;
-            }
-        }
+        String specialCharacters = "^(?=.*[0-9!@#$%^&*(),.?:{}|<>\\.]).{2,15}$";
+        boolean doesHaveSpecialC = name.matches(specialCharacters);
 
-        if(name.length()>2 && countNumbers==0 && countSpecialSymbol ==0)
+
+        if(name.length()>1 && doesHaveSpecialC==false)
         {
+            name_er.setText("");
             return true;
         }
-        else
-            return false;*/
-        return true;
+        else {
+            if(name.isEmpty())
+            {
+                name_er.setText("name's field can not be empty'");
+                return false;
+            }
+            name_er.setText("name is not valid");
+            return false;
+        }
     }
 }

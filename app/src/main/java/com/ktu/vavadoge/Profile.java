@@ -22,13 +22,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Profile extends AppCompatActivity {
 
     Button logout, button, buttonFriends;
     String url_logout = "http://134.209.250.135:8080/user/logout";
     String url_take_data = "http://134.209.250.135:8080/user/self";
-    String url_add_friend = "http://134.209.250.135:8080/user/friend";
+    String url_add_friend = "http://134.209.250.135:8080/user/friend-request?self=true";
 
     TextView message;
     TextView name;
@@ -40,12 +42,15 @@ public class Profile extends AppCompatActivity {
 
     EditText input_otherUser;
 
-    String otherName;
+   // String usernames;
+
+    private static String otherName;
     public ArrayList<String> arrayList = new ArrayList<>();
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    //protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         logout = (Button) findViewById(R.id.logout_button);
@@ -57,14 +62,8 @@ public class Profile extends AppCompatActivity {
         test = (TextView) findViewById(R.id.username_field);
         time = (TextView) findViewById(R.id.time_field);
         testing = (TextView) findViewById(R.id.textView11);
-
-
         input_otherUser = (EditText) findViewById(R.id.editTextTextPersonName3);
-
-
-
-
-       /* Button OpenBottomSheet = findViewById(R.id.open_bottom_sheet_button);
+        /* Button OpenBottomSheet = findViewById(R.id.open_bottom_sheet_button);
 
         OpenBottomSheet.setOnClickListener(
                 new View.OnClickListener() {
@@ -77,42 +76,32 @@ public class Profile extends AppCompatActivity {
                                 "ModalBottomSheet");
                     }
                 });
+        */
 
-*/
         JsonObjectRequest jsn = new JsonObjectRequest(Request.Method.GET, url_take_data, null, new Response.Listener<JSONObject>() {
             //assigns json object values to string and then to appropriate text box
             @Override
             public void onResponse(JSONObject response) {
                 //message.setText("Response2: " + response.toString());
-
-                String usernames = null;
-                try {
-                    usernames = response.getString("username");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
                 String names = null;
-                try {
-                    names = response.getString("name");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                String usernames = null;
                 String emails= null;
-                try {
-                    emails = response.getString("email");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
                 String time_value = null;
                 try {
+                    usernames = response.getString("username");
+                    UserProfile.setName(usernames);
+                    names = response.getString("name");
+                    emails = response.getString("email");
                     time_value = response.getString("created_at");
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 name.setText(names);
                 email.setText(emails);
                 test.setText(usernames);
-                time.setText(time_value);
+                time.setText(time_value.substring(0,10));
+              // "[0-9]{4}+\-[0-9]{2}\-[0-9]{2}"
 
             }
         }, new Response.ErrorListener() {
@@ -199,7 +188,13 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), FriendsProfiles.class);
+
+                Bundle b = new Bundle();
+                b.putString("username", name.toString());
+                intent.putExtra("person",b);
+
                 startActivity(intent);
+
             }
         });
         button.setOnClickListener(new View.OnClickListener() {

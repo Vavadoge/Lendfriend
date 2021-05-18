@@ -158,6 +158,7 @@ public class Registration extends AppCompatActivity {
 
 
     }
+
     // validation of input fields
     private boolean val_email(String email) {
         int count = 0;

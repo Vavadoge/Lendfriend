@@ -9,28 +9,30 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="0dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/input_field"
-        android:drawableLeft="@drawable/ic_person"
-        android:drawablePadding="10dp"
-        android:drawableTint="@color/fifth"
-        android:elevation="6dp"
-        android:ems="10"
-        android:fontFamily="@font/abeezee"
-        android:hint="@string/registration_name"
-        android:inputType="textPersonName"
-        android:textColorHint="@color/font_color"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-    <EditText
+        <EditText
+            android:id="@+id/editTextTextPersonName"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/input_field"
+            android:drawableLeft="@drawable/ic_person"
+            android:drawablePadding="10dp"
+            android:drawableTint="@color/fifth"
+            android:elevation="6dp"
+            android:ems="10"
+            android:fontFamily="@font/abeezee"
+            android:hint="@string/registration_name"
+            android:inputType="textPersonName"
+            android:textColorHint="@color/font_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+        <EditText
         android:id="@+id/editTextTextPersonName2"
         android:layout_width="0dp"
         android:layout_height="46dp"
@@ -93,21 +95,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
 
-    <Button
-        android:id="@+id/button_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="@color/fourth"
-        android:fontFamily="@font/abeezee"
-        android:text="Join Now!"
-        android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        <Button
+            android:id="@+id/button_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:backgroundTint="@color/fourth"
+            android:fontFamily="@font/abeezee"
+            android:text="Join Now!"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <View
+        <View
         android:id="@+id/view"
         android:layout_width="0dp"
         android:layout_height="130dp"
@@ -138,8 +140,41 @@
                 android:orientation="horizontal"></LinearLayout>
         </HorizontalScrollView>
 
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="parent"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress"
+            tools:layout_editor_absoluteX="0dp">
+
+
+            <RadioButton
+                android:id="@+id/female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Female" />
+
+            <RadioButton
+                android:id="@+id/male"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Male" />
+
+            <RadioButton
+                android:id="@+id/other"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Other" />
+        </RadioGroup>
+
         <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageView1"
         android:layout_width="170dp"
         android:layout_height="170dp"
         android:layout_marginTop="45dp"
@@ -147,21 +182,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/white_circle" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_marginTop="45dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/ic_av4"
+             />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="32dp"
-        android:ems="10"
-        android:fontFamily="@font/abeezee_italic"
-        android:text="@string/registration_agreement"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="76dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:fontFamily="@font/abeezee_italic"
+            android:text="@string/registration_agreement"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
 
         <TextView
             android:id="@+id/textView2"
@@ -225,14 +271,14 @@
             android:id="@+id/sign_in"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="16dp"
             android:text="Sign in"
             android:textColor="@color/third"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.7"
+            app:layout_constraintHorizontal_bias="0.682"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button_register"
             app:layout_constraintVertical_bias="0.0" />
@@ -241,11 +287,12 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="12dp"
             android:text="Already have an account?"
             android:textColor="@color/font_color"
             app:layout_constraintBottom_toBottomOf="@+id/sign_in"
-            app:layout_constraintEnd_toStartOf="@+id/sign_in" />
+            app:layout_constraintEnd_toStartOf="@+id/sign_in"
+            app:layout_constraintTop_toTopOf="@+id/sign_in" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -4,47 +4,84 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="184dp"
-        android:text="Button"
+    android:layout_height="match_parent"
+    tools:context=".SelectDebtType">
+    <View
+        android:id="@+id/view444"
+        android:layout_width="0dp"
+        android:layout_height="130dp"
+        android:background="@drawable/color_gradient"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textTitle1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/abeezee_italic"
+        android:text="Select debt type"
+        android:textColor="@color/white"
+        android:textColorLink="@color/second"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view444" />
 
     <ImageButton
-        android:id="@+id/searchImageButton"
-        android:layout_width="79dp"
-        android:layout_height="80dp"
+        android:id="@+id/searchImageButtonKava"
+        android:layout_width="135dp"
+        android:layout_height="135dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="172dp"
-        android:src="@mipmap/ic_kava"
-        app:layout_constraintStart_toEndOf="@+id/button"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="112dp"
-        android:layout_marginTop="152dp"
-        android:text="Button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="144dp"
-        android:layout_marginEnd="60dp"
-        android:text="Button"
+        android:layout_marginEnd="44dp"
+        android:src="@drawable/kava"
+        app:layout_constraintBottom_toBottomOf="@+id/searchImageButtonMasina"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchImageButton" />
+        app:layout_constraintTop_toBottomOf="@+id/view444"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageButton
+        android:id="@+id/searchImageButtonMaistas"
+        android:layout_width="135dp"
+        android:layout_height="135dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/maistas"
+        app:layout_constraintEnd_toEndOf="@+id/searchImageButtonKava"
+        app:layout_constraintTop_toBottomOf="@+id/searchImageButtonKava" />
+
+    <ImageButton
+        android:id="@+id/searchImageButtonMasina"
+        android:layout_width="135dp"
+        android:layout_height="135dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="36dp"
+        android:src="@drawable/masina"
+        app:layout_constraintEnd_toStartOf="@+id/searchImageButtonKava"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view444" />
+
+    <ImageButton
+        android:id="@+id/searchImageButtonEuras"
+        android:layout_width="135dp"
+        android:layout_height="135dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="36dp"
+        android:src="@drawable/euro"
+        app:layout_constraintBottom_toBottomOf="@+id/searchImageButtonMaistas"
+        app:layout_constraintEnd_toStartOf="@+id/searchImageButtonMaistas"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/searchImageButtonMasina"
+        app:layout_constraintTop_toBottomOf="@+id/searchImageButtonMasina"
+        app:layout_constraintVertical_bias="1.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

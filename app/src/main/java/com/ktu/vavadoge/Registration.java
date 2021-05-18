@@ -170,11 +170,7 @@ public class Registration extends AppCompatActivity {
                         }
                        // selectedSuperStar = johnCena.getText().toString();
                     }
-                   else {
-                        UserPicture.setPicture("other");
-                        //  andyOrton.getText().toString();
-                    }
-
+                   
 
                     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                             (Request.Method.POST, url_register, test, new Response.Listener<JSONObject>() {

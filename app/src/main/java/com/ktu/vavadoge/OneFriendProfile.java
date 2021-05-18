@@ -20,6 +20,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -27,25 +28,29 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class OneFriendProfile  extends AppCompatActivity {
-    String url_debts = "http://134.209.250.135:8080/user/debt";
-    String url_check_debt_requests = "http://134.209.250.135:8080/user/debt-request";
+    String url_debts_received_not_confirmed  = "http://134.209.250.135:8080/user/debt?status=proposal";
+    String url_debts_sent_not_confirmed = "http://134.209.250.135:8080/user/debt?self=true&status=proposal";
+    String url_debts_confirmed_to_us = "http://134.209.250.135:8080/user/debt?self=true&status=accepted";
+    String url_debts_confirmed_from_us = "http://134.209.250.135:8080/user/debt?status=accepted";
 
 
-    String url_add_friend = "http://134.209.250.135:8080/user/friend-request?self=true";
-    String url_check_friends = "http://134.209.250.135:8080/user/friend";
-    String url_check_friend_requests = "http://134.209.250.135:8080/user/friend-request";
+    //String url_add_friend = "http://134.209.250.135:8080/user/friend-request?self=true";
+    //String url_check_friends = "http://134.209.250.135:8080/user/friend";
+    //String url_check_friend_requests = "http://134.209.250.135:8080/user/friend-request";
 
 
 
-    ArrayList<UserFriend> friends1 = new ArrayList<>();
-    ArrayList<UserFriend> friends2 = new ArrayList<>();
-    ArrayList<UserFriend> friends = new ArrayList<>();
+    ArrayList<OneDebt> debts = new ArrayList<>();
+    ArrayList<OneDebt> debts1 = new ArrayList<>();
+    ArrayList<OneDebt> debts2 = new ArrayList<>();
+    ArrayList<OneDebt> debts3 = new ArrayList<>();
     ArrayList<String> eilute = new ArrayList<>();
-    ArrayList<UserFriend> finalList = new ArrayList<>();
-    ArrayList<ArrayList<UserFriend>> draugai = new ArrayList<>();
+    ArrayList<OneDebt> finalList = new ArrayList<>();
+    //ArrayList<ArrayList<UserFriend>> draugai = new ArrayList<>();
 
     //UserFriend[] friendList1;
     RequestQueue queue;
@@ -69,68 +74,242 @@ public class OneFriendProfile  extends AppCompatActivity {
             listView = (RecyclerView) findViewById(R.id.listViewOneFriendProfile);
             queue = Volley.newRequestQueue(this);
 
-        JsonArrayRequest jsn2 = new JsonArrayRequest(Request.Method.GET, url_check_friend_requests, null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest jsn3 = new JsonArrayRequest(Request.Method.GET, url_debts_sent_not_confirmed, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+
+                String xx = "";
+                xx = response.toString(); //("username");
+                System.out.println("----------url_debts_sent_not_confirmed--------------");
+                System.out.println(xx);
+                // String countryList[];
+                for (int i = 0; i < response.length(); i++) {
+                    JSONObject jresponse = null;
+                    try {
+                        jresponse = response.getJSONObject(i);
+                        int id = jresponse.getInt("id");
+                        String user = jresponse.getString("indebtor");
+                        String time_value = jresponse.getString("created_at");
+                        time_value = time_value.substring(0,10);
+                        String information = jresponse.getString("debt");
+                        String[] str = information.split(":");
+                        information = str[2];
+                        str = information.split("\"");
+                        information = str[1];
+                        System.out.println("*******************************" + user);
+                        if (user.equals(product))
+                        {
+                            System.out.println("is -----------sent_not_confirmed");
+                            debts.add(new OneDebt(id, time_value, information, "sent_not_confirmed"));
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                eilute.add("sent_not_confirmed");
+                if (eilute.size()==4)
+                {
+                    finalList.addAll(debts);
+                    finalList.addAll(debts1);
+                    finalList.addAll(debts2);
+                    finalList.addAll(debts3);
+                    System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
+                }
+            }
+
+        }, new Response.ErrorListener() {
+            //error message
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                eilute.add("sent_not_confirmed");
+                if (eilute.size()==4)
+                {
+                    finalList.addAll(debts);
+                    finalList.addAll(debts1);
+                    finalList.addAll(debts2);
+                    finalList.addAll(debts3);
+                    System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
+                }
+            }
+
+        });
+        JsonArrayRequest jsn1 = new JsonArrayRequest(Request.Method.GET, url_debts_confirmed_to_us, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+
+                String xx = "";
+                xx = response.toString(); //("username");
+                System.out.println("----------url_debts_confirmed_to_us--------------");
+                System.out.println(xx);
+                // String countryList[];
+                for (int i = 0; i < response.length(); i++) {
+                    JSONObject jresponse = null;
+                    try {
+                        jresponse = response.getJSONObject(i);
+                        int id = jresponse.getInt("id");
+                        ///CIA GALIMAI REIKS PAKEIST
+                        String information = jresponse.getString("debt");
+                        String[] str = information.split(":");
+                        information = str[2];
+                        str = information.split("\"");
+                        information = str[1];
+                        String user = jresponse.getString("debtor");
+                        String time_value = jresponse.getString("created_at");
+                        time_value = time_value.substring(0,10);
+                        if (user.equals(product))
+                            debts1.add(new OneDebt(id, time_value, information, "confirmed_to_us"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                eilute.add("confirmed_to_us");
+                if (eilute.size()==4)
+                {
+                    finalList.addAll(debts);
+                    finalList.addAll(debts1);
+                    finalList.addAll(debts2);
+                    finalList.addAll(debts3);
+                    System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
+                }
+            }
+
+        }, new Response.ErrorListener() {
+            //error message
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                eilute.add("confirmed_to_us");
+                if (eilute.size()==4)
+                {
+                    finalList.addAll(debts);
+                    finalList.addAll(debts1);
+                    finalList.addAll(debts2);
+                    finalList.addAll(debts3);
+                    System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
+                }
+
+            }
+
+        });
+        JsonArrayRequest jsn = new JsonArrayRequest(Request.Method.GET, url_debts_confirmed_from_us, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+
+                String xx = "";
+                xx = response.toString(); //("username");
+                System.out.println("----------url_debts_confirmed_from_us--------------");
+                System.out.println(xx);
+                // String countryList[];
+                for (int i = 0; i < response.length(); i++) {
+                    JSONObject jresponse = null;
+                    try {
+                        jresponse = response.getJSONObject(i);
+                        int id = jresponse.getInt("id");
+                        String information = jresponse.getString("debt");
+                        String[] str = information.split(":");
+                        information = str[2];
+                        str = information.split("\"");
+                        information = str[1];
+                        ///CIA GALIMAI REIKS PAKEIST
+                        String user = jresponse.getString("indebtor");
+                        String time_value = jresponse.getString("created_at");
+                        time_value = time_value.substring(0,10);
+                        if (user.equals(product))
+                            debts2.add(new OneDebt(id, time_value, information, "confirmed_from_us"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                eilute.add("confirmed_from_us");
+                if (eilute.size()==4)
+                {
+                    finalList.addAll(debts);
+                    finalList.addAll(debts1);
+                    finalList.addAll(debts2);
+                    finalList.addAll(debts3);
+                    System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
+                }
+            }
+
+        }, new Response.ErrorListener() {
+            //error message
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                eilute.add("confirmed_from_us");
+                if (eilute.size()==4)
+                {
+                    finalList.addAll(debts);
+                    finalList.addAll(debts1);
+                    finalList.addAll(debts2);
+                    finalList.addAll(debts3);
+                    System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
+                }
+
+            }
+
+        });
+        JsonArrayRequest jsn2 = new JsonArrayRequest(Request.Method.GET, url_debts_received_not_confirmed, null, new Response.Listener<JSONArray>() {
             //assigns json object values to string and then to appropriate text box
             @Override
             public void onResponse(JSONArray response) {
 
                 String xx = "";
                 xx = response.toString(); //("username");
+                System.out.println("----------url_debts_received_not_confirmed--------------");
+                System.out.println(xx);
                 // String countryList[];
                 for (int i = 0; i < response.length(); i++) {
                     JSONObject jresponse = null;
                     try {
                         jresponse = response.getJSONObject(i);
+                        int id = jresponse.getInt("id");
+                        String information = jresponse.getString("debt");
+                        String[] str = information.split(":");
+                        information = str[2];
+                        str = information.split("\"");
+                        information = str[1];
+                        String user = jresponse.getString("debtor");
+                        String time_value = jresponse.getString("created_at");
+                        time_value = time_value.substring(0,10);
+                        System.out.println("*******************************" + information);
+                        if (user.equals(product))
+                        {
+                            System.out.println("is -----------received_not_confirmed");
+                            debts3.add(new OneDebt(id, time_value, information, "received_not_confirmed"));
+                        }
 
-                        String nickname = jresponse.getString("friend");
-                        String first = jresponse.getString("owner");
-                        String status = jresponse.getString("accepted");
-                        friends.add(new UserFriend(first, status, "received"));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
-                eilute.add("received");
-                draugai.add(friends);
-                System.out.println("-------received-----------" + friends.size());
-                if(eilute.size()==3)
+                eilute.add("received_not_confirmed");
+                if (eilute.size()==4)
                 {
-                    //String[] text = eilute.toArray(new String[3]);
-                    finalList.addAll(friends);
-                    finalList.addAll(friends1);
-                    finalList.addAll(friends2);
-
-                    // set up the RecyclerView
-                    UserFriend [] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
-                    RecyclerView recyclerView = findViewById(R.id.listView);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    OneFriendProfile.DebtsAdapter arrayAdapter = new OneFriendProfile.DebtsAdapter(getApplicationContext(), friendList1);
-                    recyclerView.setAdapter(arrayAdapter);
+                    finalList.addAll(debts);
+                    finalList.addAll(debts1);
+                    finalList.addAll(debts2);
+                    finalList.addAll(debts3);
+                    System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
                 }
+
             }
         }, new Response.ErrorListener() {
             //error message
             @Override
             public void onErrorResponse(VolleyError error) {
-                eilute.add("received");
-                System.out.println("-----------------------Vo cia----------- received");
-                if(eilute.size()==3) {
-                    //String[] text = eilute.toArray(new String[3]);
-                    finalList.addAll(friends);
-                    finalList.addAll(friends1);
-                    finalList.addAll(friends2);
-
-                    // set up the RecyclerView
-                    UserFriend[] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
-                    RecyclerView recyclerView = findViewById(R.id.listView);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    OneFriendProfile.DebtsAdapter arrayAdapter = new OneFriendProfile.DebtsAdapter(getApplicationContext(), friendList1);
-                    recyclerView.setAdapter(arrayAdapter);
+                eilute.add("received_not_confirmed");
+                if (eilute.size()==4)
+                {
+                    finalList.addAll(debts);
+                    finalList.addAll(debts1);
+                    finalList.addAll(debts2);
+                    finalList.addAll(debts3);
+                    System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
                 }
             }
 
         });
-        JsonArrayRequest jsn1 = new JsonArrayRequest(Request.Method.GET, url_check_friends, null, new Response.Listener<JSONArray>() {
+        /*JsonArrayRequest jsn1 = new JsonArrayRequest(Request.Method.GET, url_check_friends, null, new Response.Listener<JSONArray>() {
             //assigns json object values to string and then to appropriate text box
             @Override
             public void onResponse(JSONArray response) {
@@ -263,8 +442,8 @@ public class OneFriendProfile  extends AppCompatActivity {
                     recyclerView.setAdapter(arrayAdapter);
                 }
             }
-        });
-
+        });*/
+        queue.add(jsn3);
         queue.add(jsn2);
         queue.add(jsn1);
         queue.add(jsn);

@@ -71,7 +71,17 @@ public class Debts extends AppCompatActivity {
             public void onClick(View v) {
                 information = input_type.getText().toString();
                 username = input_username.getText().toString();
-
+                JSONObject data = new JSONObject();
+                try {
+                    data.put("type", "custom");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    data.put("info", information);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
                 JSONObject test = new JSONObject();
                 try {
@@ -80,41 +90,36 @@ public class Debts extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 try {
-                    test.put("type", type);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    test.put("information", information);
+                    test.put("data", data);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
 
-                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                            (Request.Method.POST, url_register_debt, test, new Response.Listener<JSONObject>() {
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                        (Request.Method.POST, url_register_debt, test, new Response.Listener<JSONObject>() {
 
-                                @Override
-                                public void onResponse(JSONObject response) {
-                                    textView15.setText("Debt has been sent");
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                textView15.setText("Debt has been sent");
 
-                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                    startActivity(intent);
-                                }
-                            }, new Response.ErrorListener() {
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
+                            }
+                        }, new Response.ErrorListener() {
 
-                                //error message
+                            //error message
 
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    textView15.setText("Debt can not been sent");
-                                }
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                textView15.setText("Debt can not been sent");
+                            }
 
-                            });
+                        });
 
-                    // Access the RequestQueue through your singleton class.
-                    RequestGate.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
-                }
+                // Access the RequestQueue through your singleton class.
+                RequestGate.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
+            }
 
 
 

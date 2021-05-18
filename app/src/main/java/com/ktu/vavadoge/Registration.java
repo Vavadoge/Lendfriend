@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextClock;
 import android.widget.TextView;
 
@@ -41,6 +43,8 @@ public class Registration extends AppCompatActivity {
     Button button;
     TextView message, sign_in;
     TextView name_er, username_er, password_er, email_er;
+   // RadioGroup radioButton;
+    RadioButton female, male, other;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +64,38 @@ public class Registration extends AppCompatActivity {
         username_er = (TextView) findViewById(R.id.username_error);
         password_er = (TextView) findViewById(R.id.password_error);
         email_er = (TextView) findViewById(R.id.email_error);
+        female = (RadioButton) findViewById(R.id.female);
+        male = (RadioButton) findViewById(R.id.male);
+        other = (RadioButton) findViewById(R.id.other);
+      /*  radioButton.setOnClickListener(new View.OnClickListener() {
+            //when user press registration button, the  registration  page is redirected to login page
+            @Override
+            public void onClick(View view) {
+                // Is the button now checked?
+                boolean checked = ((RadioButton) view).isChecked();
+
+                // Check which radio button was clicked
+                switch(view.getId()) {
+                    case R.id.female:
+                        if (checked){
+                            UserPicture.setPicture("female");
+                            break;}
+                    case R.id.male:
+                        if (checked) {
+                            UserPicture.setPicture("male");
+                            // Ninjas rule
+                            break;
+                        }
+                    case R.id.other:
+                        if (checked) {
+                            UserPicture.setPicture("other");
+                            // Ninjas rule
+                            break;
+                        }
+                }
+            }
+        });*/
+
 
 
         sign_in.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +140,39 @@ public class Registration extends AppCompatActivity {
                         test.put("email", email);
                     } catch (JSONException e) {
                         e.printStackTrace();
+                    }
+
+
+
+                    if (other.isChecked()) {
+                        UserPicture.setPicture("other");
+                        try {
+                            test.put("picture_id", 3);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                      //  andyOrton.getText().toString();
+                    } else if (male.isChecked()) {
+                        UserPicture.setPicture("male");
+                        try {
+                            test.put("picture_id", 1);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                      //  selectedSuperStar = sheamus.getText().toString();
+                    } else if (female.isChecked()) {
+                        UserPicture.setPicture("female");
+                        try {
+                            test.put("picture_id", 2);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                       // selectedSuperStar = johnCena.getText().toString();
+                    }
+                   else {
+                        UserPicture.setPicture("other");
+                        //  andyOrton.getText().toString();
                     }
 
 

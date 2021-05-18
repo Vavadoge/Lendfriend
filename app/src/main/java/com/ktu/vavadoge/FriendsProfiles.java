@@ -20,11 +20,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
@@ -50,10 +52,19 @@ public class FriendsProfiles extends AppCompatActivity {
     List<String> listNotFriendsSent = new LinkedList<>();
     ArrayList<String> arrayListNotFriendsReceived = new ArrayList<>();
     List<String> listNotFriendsReceived = new LinkedList<>();
+    //ArrayList<UserFriend> allFriends = new ArrayList<>();
+    ArrayList<UserFriend> friends1 = new ArrayList<>();
+    ArrayList<UserFriend> friends2 = new ArrayList<>();
     ArrayList<UserFriend> friends = new ArrayList<>();
+    ArrayList<String> eilute = new ArrayList<>();
+    ArrayList<UserFriend> finalList = new ArrayList<>();
+    ArrayList<ArrayList<UserFriend>> draugai = new ArrayList<>();
+    //UserFriend[] friendList1;
+    RequestQueue queue;
     TextView textInvite,textView_invite_action;//quote,
     FloatingActionButton fab;
     EditText input_otherUser;
+
 
     String otherName;
 
@@ -64,6 +75,8 @@ public class FriendsProfiles extends AppCompatActivity {
       //  button = (Button) findViewById(R.id.buttonFriend);
         //button = (Button) findViewById(R.id.friendsList);
         listView = (RecyclerView) findViewById(R.id.listView);
+        queue = Volley.newRequestQueue(this);
+
 //        listViewNotFriends =(RecyclerView) findViewById(R.id.appendingFriends);
        // input_otherUser = (EditText) findViewById(R.id.friendsName);
      //   buttonDebt = (Button) findViewById(R.id.buttonDebt);
@@ -73,8 +86,10 @@ public class FriendsProfiles extends AppCompatActivity {
         textView_invite_action.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(getApplicationContext(), AddingFriend.class);
                 startActivity(intent);
+
                 finish();
             }
         });
@@ -82,8 +97,11 @@ public class FriendsProfiles extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                queue.start();
+
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+
                 //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 //      .setAction("Action", null).show();
             }
@@ -125,6 +143,32 @@ public class FriendsProfiles extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                }
+                eilute.add("received");
+                draugai.add(friends);
+                System.out.println("-------received-----------" + friends.size());
+                if(eilute.size()==3)
+                {
+                    String[] text = eilute.toArray(new String[3]);
+                    finalList.addAll(friends);
+                    finalList.addAll(friends1);
+                    finalList.addAll(friends2);
+                    //quote.setVisibility(View.GONE);
+                    textInvite.setVisibility(View.GONE);
+                    textView_invite_action.setVisibility(View.GONE);
+
+                    // set up the RecyclerView
+                    UserFriend [] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
+                    RecyclerView recyclerView = findViewById(R.id.listView);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    FriendsAdapter arrayAdapter = new FriendsAdapter(getApplicationContext(), friendList1);
+                    recyclerView.setAdapter(arrayAdapter);
+                    //cancelAllQueuedRequests();
+                    //FriendsAdapter(getApplicationContext(), R.layout.activity_viewlist, R.id.tekstukas, friendList1);
+
+
+                    // ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), R.layout.activity_viewlist, R.id.tekstukas, friendList1);
+                    // ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_friends, R.id.textView, arrayList);
                 }
             }
         }, new Response.ErrorListener() {
@@ -170,11 +214,59 @@ public class FriendsProfiles extends AppCompatActivity {
                         String nickname = jresponse.getString("friend");
                         String first = jresponse.getString("owner");
                         String status = jresponse.getString("accepted");
-                        friends.add(new UserFriend(nickname, status, "friend"));
+                        friends1.add(new UserFriend(nickname, status, "friend"));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
+                eilute.add("friend");
+                draugai.add(friends1);
+                System.out.println("-------friend-----------" + friends1.size());
+                if(eilute.size()==3)
+                {
+                    String[] text = eilute.toArray(new String[3]);
+                    finalList.addAll(friends);
+                    finalList.addAll(friends1);
+                    finalList.addAll(friends2);
+                    //quote.setVisibility(View.GONE);
+                    textInvite.setVisibility(View.GONE);
+                    textView_invite_action.setVisibility(View.GONE);
+
+                    // set up the RecyclerView
+                    UserFriend [] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
+                    RecyclerView recyclerView = findViewById(R.id.listView);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    FriendsAdapter arrayAdapter = new FriendsAdapter(getApplicationContext(), friendList1);
+                    recyclerView.setAdapter(arrayAdapter);
+                    //cancelAllQueuedRequests();
+                    //FriendsAdapter(getApplicationContext(), R.layout.activity_viewlist, R.id.tekstukas, friendList1);
+
+
+                    // ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), R.layout.activity_viewlist, R.id.tekstukas, friendList1);
+                    // ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_friends, R.id.textView, arrayList);
+                }
+                /*if(friends1.size()>0)
+                {
+
+                    //quote.setVisibility(View.GONE);
+                    textInvite.setVisibility(View.GONE);
+                    textView_invite_action.setVisibility(View.GONE);
+
+                    // set up the RecyclerView
+
+                    UserFriend [] friendList1 = friends1.toArray(new UserFriend[friends1.size()]);
+                    RecyclerView recyclerView = findViewById(R.id.listView);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    FriendsAdapter arrayAdapter = new FriendsAdapter(getApplicationContext(), friendList1);
+                    recyclerView.setAdapter(arrayAdapter);
+                   // cancelAllQueuedRequests();
+                    //FriendsAdapter(getApplicationContext(), R.layout.activity_viewlist, R.id.tekstukas, friendList1);
+
+
+                    // ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), R.layout.activity_viewlist, R.id.tekstukas, friendList1);
+                    // ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_friends, R.id.textView, arrayList);
+                }*/
+
             }
         }, new Response.ErrorListener() {
             //error message
@@ -224,28 +316,34 @@ public class FriendsProfiles extends AppCompatActivity {
 
                             String username = UserProfile.getName();
 
-                            friends.add(new UserFriend(nickname, status,"sent"));
+                            friends2.add(new UserFriend(nickname, status,"sent"));
 
                     }
                     catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
+                eilute.add("accepted");
+                draugai.add(friends2);
+                System.out.println("-------sent-----------" + friends2.size());
 
-                if(friends.size()>0)
+                if(eilute.size()==3)
                 {
+                    String[] text = eilute.toArray(new String[3]);
+                    finalList.addAll(friends);
+                    finalList.addAll(friends1);
+                    finalList.addAll(friends2);
                     //quote.setVisibility(View.GONE);
                     textInvite.setVisibility(View.GONE);
                     textView_invite_action.setVisibility(View.GONE);
 
                     // set up the RecyclerView
-
-                    UserFriend [] friendList1 = friends.toArray(new UserFriend[friends.size()]);
+                    UserFriend [] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
                     RecyclerView recyclerView = findViewById(R.id.listView);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                     FriendsAdapter arrayAdapter = new FriendsAdapter(getApplicationContext(), friendList1);
                     recyclerView.setAdapter(arrayAdapter);
-
+                    //cancelAllQueuedRequests();
                     //FriendsAdapter(getApplicationContext(), R.layout.activity_viewlist, R.id.tekstukas, friendList1);
 
 
@@ -281,7 +379,7 @@ public class FriendsProfiles extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 if(friends.size()>0)
                 {
-
+                    System.out.println("-----------------------Vo cia");
                     // set up the RecyclerView
                     UserFriend [] friendList1 = friends.toArray(new UserFriend[friends.size()]);
                     RecyclerView recyclerView = findViewById(R.id.listView);
@@ -295,7 +393,7 @@ public class FriendsProfiles extends AppCompatActivity {
                     // ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), R.layout.activity_viewlist, R.id.tekstukas, friendList1);
                     // ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_friends, R.id.textView, arrayList);
                 }
-                int i = 0;
+                //int i = 0;
 //
 //                try {
 //                    if(error.networkResponse != null)
@@ -319,10 +417,38 @@ public class FriendsProfiles extends AppCompatActivity {
             }
 
         });
-        RequestGate.getInstance(getApplicationContext()).addToRequestQueue(jsn2);
-        RequestGate.getInstance(getApplicationContext()).addToRequestQueue(jsn1);
-        RequestGate.getInstance(getApplicationContext()).addToRequestQueue(jsn);
 
+       // System.out.println("SVARBUUUUUUUU DYDIS  " + kiekis)
+        queue.add(jsn2);
+        queue.add(jsn1);
+        queue.add(jsn);
+        //cancelAllQueuedRequests();
+       // RequestGate.getInstance(getApplicationContext()).addToRequestQueue(jsn2);
+        //RequestGate.getInstance(getApplicationContext()).addToRequestQueue(jsn1);
+        //RequestGate.getInstance(getApplicationContext()).addToRequestQueue(jsn);
+     //  System.out.println("SVARBUUUUUUUU DYDIS  " + kiekis);
+
+
+        /*if(friends.size()>0)
+        {
+            //quote.setVisibility(View.GONE);
+            textInvite.setVisibility(View.GONE);
+            textView_invite_action.setVisibility(View.GONE);
+
+            // set up the RecyclerView
+
+            UserFriend [] friendList1 = friends.toArray(new UserFriend[friends.size()]);
+            RecyclerView recyclerView = findViewById(R.id.listView);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+            FriendsAdapter arrayAdapter = new FriendsAdapter(getApplicationContext(), friendList1);
+            recyclerView.setAdapter(arrayAdapter);
+
+            //FriendsAdapter(getApplicationContext(), R.layout.activity_viewlist, R.id.tekstukas, friendList1);
+
+
+            // ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), R.layout.activity_viewlist, R.id.tekstukas, friendList1);
+            // ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_friends, R.id.textView, arrayList);
+        }*/
 
         // String list[] = (String[]) arrayList.toArray();
         // for(int i=0; i<arrayList.)
@@ -335,7 +461,6 @@ public class FriendsProfiles extends AppCompatActivity {
         //    listView.setAdapter(arrayAdapter);
 
     }
-
     public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHolder> {
 
         private UserFriend[] localDataSet;
@@ -412,6 +537,7 @@ public class FriendsProfiles extends AppCompatActivity {
 
             // Get element from your dataset at this position and replace the
             // contents of the view with that element
+            System.out.println("+" + getItemCount());
             if(localDataSet[position].getType().equals("received"))
             {
                 viewHolder.getAddBtn().setVisibility(View.VISIBLE);
@@ -455,7 +581,7 @@ public class FriendsProfiles extends AppCompatActivity {
                                 public void onErrorResponse(VolleyError error) {
                                     // Kazka pasakyt kad nejo prideti
 
-                                    int a = 5;
+                                   // int a = 5;
                                 }
                             });
 

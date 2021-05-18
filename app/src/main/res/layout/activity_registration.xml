@@ -116,7 +116,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+
+        <HorizontalScrollView
+            android:id="@+id/xml_full_img_hor_below_view"
+            android:layout_width="173dp"
+            android:layout_height="169dp"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="44dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.508"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/view">
+
+            <LinearLayout
+                android:id="@+id/xml_full_img_linear_below_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:orientation="horizontal"></LinearLayout>
+        </HorizontalScrollView>
+
+        <ImageView
         android:id="@+id/imageView"
         android:layout_width="170dp"
         android:layout_height="170dp"
@@ -147,10 +169,11 @@
             android:layout_height="wrap_content"
             android:text="TextView"
             android:visibility="invisible"
-            tools:layout_editor_absoluteX="173dp"
-            tools:layout_editor_absoluteY="17dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+        <TextView
         android:id="@+id/name_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

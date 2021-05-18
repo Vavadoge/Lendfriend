@@ -70,7 +70,7 @@ public class DebtsShow extends AppCompatActivity {
         fab1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), AddingFriend.class);
+                Intent intent = new Intent(getApplicationContext(), Debts.class);
                 startActivity(intent);
             }
         });

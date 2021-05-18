@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.ktu.vavadoge">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -31,6 +32,14 @@
 
         <activity
             android:name=".Registration"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+
+        <activity
+        android:name=".OneFriendProfile"
+        android:theme="@style/Theme.Design.Light.NoActionBar"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".DebtsShow"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
 
         <activity

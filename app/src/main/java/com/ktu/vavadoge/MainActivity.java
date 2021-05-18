@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             //when user press registration button, the  registration  page is redirected to login page
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Debts.class);
+                Intent intent = new Intent(getApplicationContext(), DebtsShow.class);
                 startActivity(intent);
             }
         });

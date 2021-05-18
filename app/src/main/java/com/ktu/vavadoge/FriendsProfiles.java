@@ -44,6 +44,8 @@ public class FriendsProfiles extends AppCompatActivity {
     String url_add_friend = "http://134.209.250.135:8080/user/friend-request?self=true";
     String url_check_friends = "http://134.209.250.135:8080/user/friend";
     String url_check_friend_requests = "http://134.209.250.135:8080/user/friend-request";
+
+
     ArrayList<String> arrayListFriends = new ArrayList<>();
     List<String> listFriends = new LinkedList<>();
     ArrayList<String> arrayListNotFriendsSent = new ArrayList<>();
@@ -428,7 +430,6 @@ public class FriendsProfiles extends AppCompatActivity {
                 viewHolder.getTextFriend().setVisibility(View.VISIBLE);
                 viewHolder.getTextView().setText((CharSequence) localDataSet[position].getUsername());
             }
-
             viewHolder.getAddBtn().setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
 
@@ -465,6 +466,44 @@ public class FriendsProfiles extends AppCompatActivity {
 
                 }
             });
+
+           /* viewHolder.getDeleteBtn().setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    int row = viewHolder.getAdapterPosition();
+                    String username = localDataSet[row].getUsername();
+                    String url_patch = url_check_friends+"/";
+                    url_patch += username;
+                    StringRequest stringRequest = new StringRequest
+                            (Request.Method.DELETE, url_patch, new Response.Listener<String>() {
+
+                                @Override
+                                public void onResponse(String response) {
+                                    //Kazka gal isvest i ekrana kad pridejo
+
+                                    viewHolder.deleteBtn.setVisibility(View.GONE);
+                                    viewHolder.addBtn.setVisibility(View.GONE);
+
+
+//                                    viewHolder.textFriend.setText("Added friend");
+//                                    viewHolder.textFriend.setVisibility(View.VISIBLE);
+//                                    viewHolder.notify();
+                                }
+                            }, new Response.ErrorListener() {
+
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    // Kazka pasakyt kad nejo prideti
+
+                                    int a = 5;
+                                }
+                            });
+
+                    // Access the RequestQueue through your singleton class.
+                    RequestGate.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+
+
+                }
+            });*/
         }
 
         // Return the size of your dataset (invoked by the layout manager)

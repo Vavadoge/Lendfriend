@@ -646,7 +646,7 @@ public class FriendsProfiles extends AppCompatActivity {
                 }
             });
 
-           /* viewHolder.getDeleteBtn().setOnClickListener(new View.OnClickListener() {
+           viewHolder.getDeleteBtn().setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     int row = viewHolder.getAdapterPosition();
                     String username = localDataSet[row].getUsername();
@@ -658,7 +658,7 @@ public class FriendsProfiles extends AppCompatActivity {
                                 @Override
                                 public void onResponse(String response) {
                                     //Kazka gal isvest i ekrana kad pridejo
-
+                                    viewHolder.textFriend.setVisibility(View.GONE);
                                     viewHolder.deleteBtn.setVisibility(View.GONE);
                                     viewHolder.addBtn.setVisibility(View.GONE);
 
@@ -682,7 +682,7 @@ public class FriendsProfiles extends AppCompatActivity {
 
 
                 }
-            });*/
+            });
         }
 
         // Return the size of your dataset (invoked by the layout manager)

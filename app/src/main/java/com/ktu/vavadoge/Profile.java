@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -41,6 +42,7 @@ public class Profile extends AppCompatActivity {
     TextView testing;
 
     EditText input_otherUser;
+    ImageView picture_my;
 
    // String usernames;
 
@@ -63,6 +65,8 @@ public class Profile extends AppCompatActivity {
         time = (TextView) findViewById(R.id.time_field);
         testing = (TextView) findViewById(R.id.textView11);
         input_otherUser = (EditText) findViewById(R.id.editTextTextPersonName3);
+        picture_my = (ImageView) findViewById(R.id.picture_my);
+
         /* Button OpenBottomSheet = findViewById(R.id.open_bottom_sheet_button);
 
         OpenBottomSheet.setOnClickListener(
@@ -87,20 +91,37 @@ public class Profile extends AppCompatActivity {
                 String usernames = null;
                 String emails= null;
                 String time_value = null;
+                String picture =null;
                 try {
                     usernames = response.getString("username");
                     UserProfile.setName(usernames);
                     names = response.getString("name");
                     emails = response.getString("email");
                     time_value = response.getString("created_at");
+                    picture=response.getString("picture_id");
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
                 name.setText(names);
                 email.setText(emails);
                 test.setText(usernames);
                 time.setText(time_value.substring(0,10));
+                switch (picture) {
+                    case "2":
+                        picture_my.setImageResource(R.drawable.avatar2);
+                        break;
+                    case "1":
+                        picture_my.setImageResource(R.drawable.avatar1);
+                        break;
+                    case "3":
+                        picture_my.setImageResource(R.drawable.avatar3);
+                        break;
+
+
+                }
+
               // "[0-9]{4}+\-[0-9]{2}\-[0-9]{2}"
 
             }

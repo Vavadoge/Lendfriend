@@ -149,7 +149,7 @@ public class FriendsProfiles extends AppCompatActivity {
                 System.out.println("-------received-----------" + friends.size());
                 if(eilute.size()==3)
                 {
-                    String[] text = eilute.toArray(new String[3]);
+                    //String[] text = eilute.toArray(new String[3]);
                     finalList.addAll(friends);
                     finalList.addAll(friends1);
                     finalList.addAll(friends2);
@@ -175,6 +175,24 @@ public class FriendsProfiles extends AppCompatActivity {
             //error message
             @Override
             public void onErrorResponse(VolleyError error) {
+                eilute.add("received");
+                System.out.println("-----------------------Vo cia----------- received");
+                if(eilute.size()==3) {
+                    //String[] text = eilute.toArray(new String[3]);
+                    finalList.addAll(friends);
+                    finalList.addAll(friends1);
+                    finalList.addAll(friends2);
+                    //quote.setVisibility(View.GONE);
+                    textInvite.setVisibility(View.GONE);
+                    textView_invite_action.setVisibility(View.GONE);
+
+                    // set up the RecyclerView
+                    UserFriend[] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
+                    RecyclerView recyclerView = findViewById(R.id.listView);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    FriendsAdapter arrayAdapter = new FriendsAdapter(getApplicationContext(), friendList1);
+                    recyclerView.setAdapter(arrayAdapter);
+                }
 //
 //                try {
 //                    if(error.networkResponse != null)
@@ -224,7 +242,7 @@ public class FriendsProfiles extends AppCompatActivity {
                 System.out.println("-------friend-----------" + friends1.size());
                 if(eilute.size()==3)
                 {
-                    String[] text = eilute.toArray(new String[3]);
+                    //String[] text = eilute.toArray(new String[3]);
                     finalList.addAll(friends);
                     finalList.addAll(friends1);
                     finalList.addAll(friends2);
@@ -242,7 +260,7 @@ public class FriendsProfiles extends AppCompatActivity {
                     //FriendsAdapter(getApplicationContext(), R.layout.activity_viewlist, R.id.tekstukas, friendList1);
 
 
-                    // ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), R.layout.activity_viewlist, R.id.tekstukas, friendList1);
+                    // ArrayAdapter arrayAdapter = new arrayAdapter(getApplicationContext(), R.layout.activity_viewlist, R.id.tekstukas, friendList1);
                     // ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_friends, R.id.textView, arrayList);
                 }
                 /*if(friends1.size()>0)
@@ -263,7 +281,7 @@ public class FriendsProfiles extends AppCompatActivity {
                     //FriendsAdapter(getApplicationContext(), R.layout.activity_viewlist, R.id.tekstukas, friendList1);
 
 
-                    // ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), R.layout.activity_viewlist, R.id.tekstukas, friendList1);
+                    // ArrayAdapter  = new ArrayAdapter(getApplicationContext(), R.layout.activity_viewlist, R.id.tekstukas, friendList1);
                     // ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_friends, R.id.textView, arrayList);
                 }*/
 
@@ -272,6 +290,24 @@ public class FriendsProfiles extends AppCompatActivity {
             //error message
             @Override
             public void onErrorResponse(VolleyError error) {
+                eilute.add("friend");
+                System.out.println("-----------------------Vo cia----------- friend");
+                if(eilute.size()==3) {
+                    //String[] text = eilute.toArray(new String[3]);
+                    finalList.addAll(friends);
+                    finalList.addAll(friends1);
+                    finalList.addAll(friends2);
+                    //quote.setVisibility(View.GONE);
+                    textInvite.setVisibility(View.GONE);
+                    textView_invite_action.setVisibility(View.GONE);
+
+                    // set up the RecyclerView
+                    UserFriend[] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
+                    RecyclerView recyclerView = findViewById(R.id.listView);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    FriendsAdapter arrayAdapter = new FriendsAdapter(getApplicationContext(), friendList1);
+                    recyclerView.setAdapter(arrayAdapter);
+                }
 //
 //                try {
 //                    if(error.networkResponse != null)
@@ -323,13 +359,13 @@ public class FriendsProfiles extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-                eilute.add("accepted");
+                eilute.add("sent");
                 draugai.add(friends2);
                 System.out.println("-------sent-----------" + friends2.size());
 
                 if(eilute.size()==3)
                 {
-                    String[] text = eilute.toArray(new String[3]);
+                    //String[] text = eilute.toArray(new String[3]);
                     finalList.addAll(friends);
                     finalList.addAll(friends1);
                     finalList.addAll(friends2);
@@ -377,22 +413,39 @@ public class FriendsProfiles extends AppCompatActivity {
             //error message
             @Override
             public void onErrorResponse(VolleyError error) {
-                if(friends.size()>0)
-                {
+               // if(friends.size()>0)
+               // {
+                    eilute.add("accepted");
                     System.out.println("-----------------------Vo cia");
+                    if(eilute.size()==3) {
+                        //String[] text = eilute.toArray(new String[3]);
+                        finalList.addAll(friends);
+                        finalList.addAll(friends1);
+                        finalList.addAll(friends2);
+                        //quote.setVisibility(View.GONE);
+                        textInvite.setVisibility(View.GONE);
+                        textView_invite_action.setVisibility(View.GONE);
+
+                        // set up the RecyclerView
+                        UserFriend[] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
+                        RecyclerView recyclerView = findViewById(R.id.listView);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                        FriendsAdapter arrayAdapter = new FriendsAdapter(getApplicationContext(), friendList1);
+                        recyclerView.setAdapter(arrayAdapter);
+                    }
                     // set up the RecyclerView
-                    UserFriend [] friendList1 = friends.toArray(new UserFriend[friends.size()]);
-                    RecyclerView recyclerView = findViewById(R.id.listView);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    FriendsAdapter arrayAdapter = new FriendsAdapter(getApplicationContext(), friendList1);
-                    recyclerView.setAdapter(arrayAdapter);
+                  //  UserFriend [] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
+                   // RecyclerView recyclerView = findViewById(R.id.listView);
+                  //  recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                   // FriendsAdapter arrayAdapter = new FriendsAdapter(getApplicationContext(), friendList1);
+                   // recyclerView.setAdapter(arrayAdapter);
 
                     //FriendsAdapter(getApplicationContext(), R.layout.activity_viewlist, R.id.tekstukas, friendList1);
 
 
                     // ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), R.layout.activity_viewlist, R.id.tekstukas, friendList1);
                     // ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_friends, R.id.textView, arrayList);
-                }
+
                 //int i = 0;
 //
 //                try {

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textboxViewDebtsFriend"
+        android:layout_width="374dp"
+        android:layout_height="29dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:fontFamily="@font/abeezee"
+        android:paddingLeft="10px"
+        android:paddingRight="10px"
+        android:textColor="@color/white"
+        android:textSize="12dp" />
+
+</LinearLayout>

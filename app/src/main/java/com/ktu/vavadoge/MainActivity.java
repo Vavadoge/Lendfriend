@@ -1,8 +1,10 @@
 package com.ktu.vavadoge;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,9 +27,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Console;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Scanner;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
     Button buttonFriends,buttonDebts, buttonProfile, buttonAddFriend, logout;
     FloatingActionButton fab;
     ListView listView;
-
+    String url_debts_confirmed_from_us = "http://134.209.250.135:8080/user/debt?status=accepted";
+    ArrayList<String> norifications = new ArrayList<>();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,6 +134,97 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        JsonArrayRequest jsn1 = new JsonArrayRequest(Request.Method.GET, url_debts_confirmed_from_us, null, new Response.Listener<JSONArray>() {
+            //assigns json object values to string and then to appropriate text box
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onResponse(JSONArray response) {
+
+                for (int i = 0; i < response.length(); i++) {
+                    JSONObject jresponse = null;
+                    try {
+                        jresponse = response.getJSONObject(i);
+                        int id = jresponse.getInt("id");
+                        String user = jresponse.getString("debtor");
+                        String time_value = jresponse.getString("created_at");
+                        time_value = time_value.substring(0,10);
+                        String information = jresponse.getString("debt");
+                        String[] str = information.split(":");
+                        information = str[2];
+                        str = information.split("\"");
+                        information = str[1];
+                        long days=0;
+                        //SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
+                        //Date firstDate = sdf.parse("06/24/2017");
+                        //Date secondDate = sdf.parse("06/30/2017");
+                        //long diffInMillies = Math.abs(secondDate.getTime() - firstDate.getTime());
+                        //long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+                        //assertEquals(6, diff);
+                        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                       // String inputString1 = "23 01 1997";
+                        //String inputString2 = "27 04 1997";
+
+                        LocalDate date1 = LocalDate.now();
+                        LocalDate date2 = LocalDate.parse(time_value, dtf);
+
+                        System.out.println("-----------------" + date1 + "-------------" + date2);
+                        //days = Duration.between(date1, date2).toDays();
+                        //long first = date1.getTime();
+                        //days = date1-date2;
+                        days = ChronoUnit.DAYS.between(date2, date1);
+                        System.out.println ("Days: " + days);
+
+
+                        String text = "You haven't returned the debt " + information + " to " + user + " for " +  days + " days";
+                        System.out.println(text);
+                        if (days > 0)
+                            norifications.add(text);
+                        //String nickname = jresponse.getString("friend");
+                        //String first = jresponse.getString("owner");
+                        //String status = jresponse.getString("accepted");
+                        //friends.add(nickname);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                if (norifications.size() > 0) {
+
+
+                    String[] friendList1 = new String[norifications.size()];
+                    norifications.toArray(friendList1);
+                    ArrayAdapter arrayAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.activity_viewlist_notification, R.id.textboxViewDebtsFriend, friendList1);
+
+                    listView.setAdapter(arrayAdapter);
+                    //listView.setOnItemClickListener(listClick);
+                }
+                else{
+                    norifications.add("You have no notifications");
+                    String[] friendList1 = new String[norifications.size()];
+                    norifications.toArray(friendList1);
+                    ArrayAdapter arrayAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.activity_viewlist_notification, R.id.textboxViewDebtsFriend, friendList1);
+
+                    listView.setAdapter(arrayAdapter);
+                }
+            }
+        }, new Response.ErrorListener() {
+            //error message
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (norifications.size() == 0)
+                {
+                    norifications.add("You have no notifications");
+                    String[] friendList1 = new String[norifications.size()];
+                    norifications.toArray(friendList1);
+                    ArrayAdapter arrayAdapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.activity_viewlist_notification, R.id.textboxViewDebtsFriend, friendList1);
+
+                    listView.setAdapter(arrayAdapter);
+                }
+            }
+
+        });
+        RequestGate.getInstance(getApplicationContext()).addToRequestQueue(jsn1);
     }
 
 

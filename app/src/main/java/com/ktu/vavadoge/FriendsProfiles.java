@@ -131,16 +131,24 @@ public class FriendsProfiles extends AppCompatActivity {
                     finalList.addAll(friends);
                     finalList.addAll(friends1);
                     finalList.addAll(friends2);
-                    //quote.setVisibility(View.GONE);
-                    textInvite.setVisibility(View.GONE);
-                    textView_invite_action.setVisibility(View.GONE);
+                    if (finalList.size() == 0)
+                    {
+                        textInvite.setVisibility(View.VISIBLE);
+                        textView_invite_action.setVisibility(View.VISIBLE);
+                    }
+                    else{
+                        textInvite.setVisibility(View.GONE);
+                        textView_invite_action.setVisibility(View.GONE);
 
-                    // set up the RecyclerView
-                    UserFriend [] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
-                    RecyclerView recyclerView = findViewById(R.id.listView);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    FriendsAdapter arrayAdapter = new FriendsAdapter(getApplicationContext(), friendList1);
-                    recyclerView.setAdapter(arrayAdapter);
+                        // set up the RecyclerView
+                        UserFriend [] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
+                        RecyclerView recyclerView = findViewById(R.id.listView);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                        FriendsAdapter arrayAdapter = new FriendsAdapter(getApplicationContext(), friendList1);
+                        recyclerView.setAdapter(arrayAdapter);
+                    }
+                    //quote.setVisibility(View.GONE);
+
                     //cancelAllQueuedRequests();
                     //FriendsAdapter(getApplicationContext(), R.layout.activity_viewlist, R.id.tekstukas, friendList1);
 
@@ -155,26 +163,31 @@ public class FriendsProfiles extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 eilute.add("received");
                 System.out.println("-----------------------Vo cia----------- received");
-                if(eilute.size()==0)
-                {
-                    textInvite.setVisibility(View.VISIBLE);
-                    textView_invite_action.setVisibility(View.VISIBLE);
-                }
+
                 if(eilute.size()==3) {
                     //String[] text = eilute.toArray(new String[3]);
                     finalList.addAll(friends);
                     finalList.addAll(friends1);
                     finalList.addAll(friends2);
-                    //quote.setVisibility(View.GONE);
-                    textInvite.setVisibility(View.GONE);
-                    textView_invite_action.setVisibility(View.GONE);
+                    if(finalList.size()==0)
+                    {
+                        textInvite.setVisibility(View.VISIBLE);
+                        textView_invite_action.setVisibility(View.VISIBLE);
+                    }
+                    else
+                    {
+                        textInvite.setVisibility(View.GONE);
+                        textView_invite_action.setVisibility(View.GONE);
 
-                    // set up the RecyclerView
-                    UserFriend[] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
-                    RecyclerView recyclerView = findViewById(R.id.listView);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    FriendsAdapter arrayAdapter = new FriendsAdapter(getApplicationContext(), friendList1);
-                    recyclerView.setAdapter(arrayAdapter);
+                        // set up the RecyclerView
+                        UserFriend[] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
+                        RecyclerView recyclerView = findViewById(R.id.listView);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                        FriendsAdapter arrayAdapter = new FriendsAdapter(getApplicationContext(), friendList1);
+                        recyclerView.setAdapter(arrayAdapter);
+                    }
+                    //quote.setVisibility(View.GONE);
+
                 }
 //
 //                try {
@@ -221,28 +234,32 @@ public class FriendsProfiles extends AppCompatActivity {
                     }
                 }
                 eilute.add("friend");
-                draugai.add(friends1);
+                //draugai.add(friends1);
                 System.out.println("-------friend-----------" + friends1.size());
-                if(friends1.size()>0) {
-                    textInvite.setVisibility(View.VISIBLE);
-                    textView_invite_action.setVisibility(View.VISIBLE);
-                }
                 if(eilute.size()==3)
                 {
                     //String[] text = eilute.toArray(new String[3]);
                     finalList.addAll(friends);
                     finalList.addAll(friends1);
                     finalList.addAll(friends2);
-                    //quote.setVisibility(View.GONE);
-                    textInvite.setVisibility(View.GONE);
-                    textView_invite_action.setVisibility(View.GONE);
+                    if (finalList.size()==0)
+                    {
+                        textInvite.setVisibility(View.VISIBLE);
+                        textView_invite_action.setVisibility(View.VISIBLE);
+                    }
+                    else{
+                        textInvite.setVisibility(View.GONE);
+                        textView_invite_action.setVisibility(View.GONE);
 
-                    // set up the RecyclerView
-                    UserFriend [] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
-                    RecyclerView recyclerView = findViewById(R.id.listView);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    FriendsAdapter arrayAdapter = new FriendsAdapter(getApplicationContext(), friendList1);
-                    recyclerView.setAdapter(arrayAdapter);
+                        // set up the RecyclerView
+                        UserFriend [] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
+                        RecyclerView recyclerView = findViewById(R.id.listView);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                        FriendsAdapter arrayAdapter = new FriendsAdapter(getApplicationContext(), friendList1);
+                        recyclerView.setAdapter(arrayAdapter);
+                    }
+                    //quote.setVisibility(View.GONE);
+
                     //cancelAllQueuedRequests();
                     //FriendsAdapter(getApplicationContext(), R.layout.activity_viewlist, R.id.tekstukas, friendList1);
 
@@ -279,26 +296,30 @@ public class FriendsProfiles extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 eilute.add("friend");
                 System.out.println("-----------------------Vo cia----------- friend");
-                if(eilute.size()==0)
-                {
-                    textInvite.setVisibility(View.VISIBLE);
-                    textView_invite_action.setVisibility(View.VISIBLE);
-                }
+
                 if(eilute.size()==3) {
                     //String[] text = eilute.toArray(new String[3]);
                     finalList.addAll(friends);
                     finalList.addAll(friends1);
                     finalList.addAll(friends2);
-                    //quote.setVisibility(View.GONE);
-                    textInvite.setVisibility(View.GONE);
-                    textView_invite_action.setVisibility(View.GONE);
+                    if (finalList.size()==0)
+                    {
+                        textInvite.setVisibility(View.VISIBLE);
+                        textView_invite_action.setVisibility(View.VISIBLE);
+                    }
+                    else{
+                        //quote.setVisibility(View.GONE);
+                        textInvite.setVisibility(View.GONE);
+                        textView_invite_action.setVisibility(View.GONE);
 
-                    // set up the RecyclerView
-                    UserFriend[] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
-                    RecyclerView recyclerView = findViewById(R.id.listView);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    FriendsAdapter arrayAdapter = new FriendsAdapter(getApplicationContext(), friendList1);
-                    recyclerView.setAdapter(arrayAdapter);
+                        // set up the RecyclerView
+                        UserFriend[] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
+                        RecyclerView recyclerView = findViewById(R.id.listView);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                        FriendsAdapter arrayAdapter = new FriendsAdapter(getApplicationContext(), friendList1);
+                        recyclerView.setAdapter(arrayAdapter);
+                    }
+
                 }
 //
 //                try {
@@ -362,15 +383,23 @@ public class FriendsProfiles extends AppCompatActivity {
                     finalList.addAll(friends1);
                     finalList.addAll(friends2);
                     //quote.setVisibility(View.GONE);
-                    textInvite.setVisibility(View.GONE);
-                    textView_invite_action.setVisibility(View.GONE);
+                    if (finalList.size() == 0)
+                    {
+                        textInvite.setVisibility(View.VISIBLE);
+                        textView_invite_action.setVisibility(View.VISIBLE);
+                    }
+                    else{
+                        textInvite.setVisibility(View.GONE);
+                        textView_invite_action.setVisibility(View.GONE);
 
-                    // set up the RecyclerView
-                    UserFriend [] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
-                    RecyclerView recyclerView = findViewById(R.id.listView);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    FriendsAdapter arrayAdapter = new FriendsAdapter(getApplicationContext(), friendList1);
-                    recyclerView.setAdapter(arrayAdapter);
+                        // set up the RecyclerView
+                        UserFriend [] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
+                        RecyclerView recyclerView = findViewById(R.id.listView);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                        FriendsAdapter arrayAdapter = new FriendsAdapter(getApplicationContext(), friendList1);
+                        recyclerView.setAdapter(arrayAdapter);
+                    }
+
                     //cancelAllQueuedRequests();
                     //FriendsAdapter(getApplicationContext(), R.layout.activity_viewlist, R.id.tekstukas, friendList1);
 
@@ -420,16 +449,24 @@ public class FriendsProfiles extends AppCompatActivity {
                         finalList.addAll(friends);
                         finalList.addAll(friends1);
                         finalList.addAll(friends2);
-                        //quote.setVisibility(View.GONE);
-                        textInvite.setVisibility(View.GONE);
-                        textView_invite_action.setVisibility(View.GONE);
+                        if (finalList.size() == 0)
+                        {
+                            textInvite.setVisibility(View.VISIBLE);
+                            textView_invite_action.setVisibility(View.VISIBLE);
+                        }
+                        else{
+                            textInvite.setVisibility(View.GONE);
+                            textView_invite_action.setVisibility(View.GONE);
 
-                        // set up the RecyclerView
-                        UserFriend[] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
-                        RecyclerView recyclerView = findViewById(R.id.listView);
-                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                        FriendsAdapter arrayAdapter = new FriendsAdapter(getApplicationContext(), friendList1);
-                        recyclerView.setAdapter(arrayAdapter);
+                            // set up the RecyclerView
+                            UserFriend[] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
+                            RecyclerView recyclerView = findViewById(R.id.listView);
+                            recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                            FriendsAdapter arrayAdapter = new FriendsAdapter(getApplicationContext(), friendList1);
+                            recyclerView.setAdapter(arrayAdapter);
+                        }
+                        //quote.setVisibility(View.GONE);
+
                     }
                     // set up the RecyclerView
                   //  UserFriend [] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);

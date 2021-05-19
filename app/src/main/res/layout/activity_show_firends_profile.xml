@@ -33,6 +33,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="@color/white"
+        android:visibility="invisible"
         android:fontFamily="@font/abeezee"
         android:text="You do not have any debt and no one is in debt to you " />
 

@@ -99,6 +99,7 @@ public class Profile extends AppCompatActivity {
                     emails = response.getString("email");
                     time_value = response.getString("created_at");
                     picture=response.getString("picture_id");
+                    UserPicture.setPicture(picture);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -118,9 +119,8 @@ public class Profile extends AppCompatActivity {
                     case "3":
                         picture_my.setImageResource(R.drawable.avatar3);
                         break;
-
-
                 }
+
 
               // "[0-9]{4}+\-[0-9]{2}\-[0-9]{2}"
 

@@ -67,36 +67,6 @@ public class Registration extends AppCompatActivity {
         female = (RadioButton) findViewById(R.id.female);
         male = (RadioButton) findViewById(R.id.male);
         other = (RadioButton) findViewById(R.id.other);
-      /*  radioButton.setOnClickListener(new View.OnClickListener() {
-            //when user press registration button, the  registration  page is redirected to login page
-            @Override
-            public void onClick(View view) {
-                // Is the button now checked?
-                boolean checked = ((RadioButton) view).isChecked();
-
-                // Check which radio button was clicked
-                switch(view.getId()) {
-                    case R.id.female:
-                        if (checked){
-                            UserPicture.setPicture("female");
-                            break;}
-                    case R.id.male:
-                        if (checked) {
-                            UserPicture.setPicture("male");
-                            // Ninjas rule
-                            break;
-                        }
-                    case R.id.other:
-                        if (checked) {
-                            UserPicture.setPicture("other");
-                            // Ninjas rule
-                            break;
-                        }
-                }
-            }
-        });*/
-
-
 
         sign_in.setOnClickListener(new View.OnClickListener() {
             //when user press registration button, the  registration  page is redirected to login page
@@ -145,7 +115,7 @@ public class Registration extends AppCompatActivity {
 
 
                     if (other.isChecked()) {
-                        UserPicture.setPicture("other");
+                        //UserPicture.setPicture("other");
                         try {
                             test.put("picture_id", 3);
                         } catch (JSONException e) {
@@ -154,7 +124,7 @@ public class Registration extends AppCompatActivity {
 
                       //  andyOrton.getText().toString();
                     } else if (male.isChecked()) {
-                        UserPicture.setPicture("male");
+                       // UserPicture.setPicture("male");
                         try {
                             test.put("picture_id", 1);
                         } catch (JSONException e) {
@@ -162,7 +132,7 @@ public class Registration extends AppCompatActivity {
                         }
                       //  selectedSuperStar = sheamus.getText().toString();
                     } else if (female.isChecked()) {
-                        UserPicture.setPicture("female");
+                    //    UserPicture.setPicture("female");
                         try {
                             test.put("picture_id", 2);
                         } catch (JSONException e) {

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -37,6 +38,8 @@ public class OneFriendProfile  extends AppCompatActivity {
     String url_debts_confirmed_to_us = "http://134.209.250.135:8080/user/debt?self=true&status=accepted";
     String url_debts_confirmed_from_us = "http://134.209.250.135:8080/user/debt?status=accepted";
 
+    String url_take_data = "http://134.209.250.135:8080/user";
+
 
     //String url_add_friend = "http://134.209.250.135:8080/user/friend-request?self=true";
     //String url_check_friends = "http://134.209.250.135:8080/user/friend";
@@ -56,19 +59,79 @@ public class OneFriendProfile  extends AppCompatActivity {
     RequestQueue queue;
 
     RecyclerView listView;
+    ImageView imageView;
+    TextView textView;
     @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_show_firends_profile);
             TextView txtProduct = (TextView) findViewById(R.id.text_friends_profile);
+            imageView = (ImageView) findViewById(R.id.picture_friends);
+        TextView textView = (TextView) findViewById(R.id.textView16);
 
-            //paraso varda draugo
-            Intent i = getIntent();
-            // getting attached intent data
-            String product = i.getStringExtra("friend");
-            // displaying selected product name
-            txtProduct.setText(product);
-            //pabaiga
+
+        //paraso varda draugo
+        Intent i = getIntent();
+        // getting attached intent data
+        String product = i.getStringExtra("friend");
+        // displaying selected product name
+        txtProduct.setText(product);
+        //pabaiga
+
+
+
+
+/*        url_take_data+="/"+product;
+        JsonArrayRequest jsnn = new JsonArrayRequest(Request.Method.GET, url_take_data, null, new Response.Listener<JSONArray>() {
+                    //assigns json object values to string and then to appropriate text box
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        //message.setText("Response2: " + response.toString());
+                        String picture =null;
+                        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+response);
+                        for(int i = 0; i < response.length(); i++) {
+                            JSONObject jresponse = null;
+                           try {
+                                jresponse = response.getJSONObject(i);
+
+                                if(product.equals(jresponse.getString("username"))) {
+                                    picture=jresponse.getString("picture_id");
+                                    System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+picture);
+                                }
+                           }
+                           catch (JSONException e) {
+                                e.printStackTrace();
+                           }
+
+                        }
+
+                        switch (picture) {
+                            case "2":
+                                imageView.setImageResource(R.drawable.avatar2);
+                                break;
+                            case "1":
+                                imageView.setImageResource(R.drawable.avatar1);
+                                break;
+                            case "3":
+                                imageView.setImageResource(R.drawable.avatar3);
+                                break;
+                        }
+
+
+                        // "[0-9]{4}+\-[0-9]{2}\-[0-9]{2}"
+
+                    }
+                }, new Response.ErrorListener() {
+                    //error message
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+
+                });
+                RequestGate.getInstance(getApplicationContext()).addToRequestQueue(jsnn);
+
+*/
+
 
 
             listView = (RecyclerView) findViewById(R.id.listViewOneFriendProfile);
@@ -114,6 +177,11 @@ public class OneFriendProfile  extends AppCompatActivity {
                     finalList.addAll(debts1);
                     finalList.addAll(debts2);
                     finalList.addAll(debts3);
+                    OneDebt [] friendList1 = finalList.toArray(new OneDebt[finalList.size()]);
+                    RecyclerView recyclerView = findViewById(R.id.listViewOneFriendProfile);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    OneFriendProfile.DebtsAdapter arrayAdapter = new OneFriendProfile.DebtsAdapter(getApplicationContext(), friendList1);
+                    recyclerView.setAdapter(arrayAdapter);
                     System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
                 }
             }
@@ -129,6 +197,11 @@ public class OneFriendProfile  extends AppCompatActivity {
                     finalList.addAll(debts1);
                     finalList.addAll(debts2);
                     finalList.addAll(debts3);
+                    OneDebt [] friendList1 = finalList.toArray(new OneDebt[finalList.size()]);
+                    RecyclerView recyclerView = findViewById(R.id.listViewOneFriendProfile);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    OneFriendProfile.DebtsAdapter arrayAdapter = new OneFriendProfile.DebtsAdapter(getApplicationContext(), friendList1);
+                    recyclerView.setAdapter(arrayAdapter);
                     System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
                 }
             }
@@ -154,7 +227,7 @@ public class OneFriendProfile  extends AppCompatActivity {
                         information = str[2];
                         str = information.split("\"");
                         information = str[1];
-                        String user = jresponse.getString("debtor");
+                        String user = jresponse.getString("indebtor");
                         String time_value = jresponse.getString("created_at");
                         time_value = time_value.substring(0,10);
                         if (user.equals(product))
@@ -170,6 +243,11 @@ public class OneFriendProfile  extends AppCompatActivity {
                     finalList.addAll(debts1);
                     finalList.addAll(debts2);
                     finalList.addAll(debts3);
+                    OneDebt [] friendList1 = finalList.toArray(new OneDebt[finalList.size()]);
+                    RecyclerView recyclerView = findViewById(R.id.listViewOneFriendProfile);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    OneFriendProfile.DebtsAdapter arrayAdapter = new OneFriendProfile.DebtsAdapter(getApplicationContext(), friendList1);
+                    recyclerView.setAdapter(arrayAdapter);
                     System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
                 }
             }
@@ -185,6 +263,11 @@ public class OneFriendProfile  extends AppCompatActivity {
                     finalList.addAll(debts1);
                     finalList.addAll(debts2);
                     finalList.addAll(debts3);
+                    OneDebt [] friendList1 = finalList.toArray(new OneDebt[finalList.size()]);
+                    RecyclerView recyclerView = findViewById(R.id.listViewOneFriendProfile);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    OneFriendProfile.DebtsAdapter arrayAdapter = new OneFriendProfile.DebtsAdapter(getApplicationContext(), friendList1);
+                    recyclerView.setAdapter(arrayAdapter);
                     System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
                 }
 
@@ -211,7 +294,7 @@ public class OneFriendProfile  extends AppCompatActivity {
                         str = information.split("\"");
                         information = str[1];
                         ///CIA GALIMAI REIKS PAKEIST
-                        String user = jresponse.getString("indebtor");
+                        String user = jresponse.getString("debtor");
                         String time_value = jresponse.getString("created_at");
                         time_value = time_value.substring(0,10);
                         if (user.equals(product))
@@ -227,6 +310,11 @@ public class OneFriendProfile  extends AppCompatActivity {
                     finalList.addAll(debts1);
                     finalList.addAll(debts2);
                     finalList.addAll(debts3);
+                    OneDebt [] friendList1 = finalList.toArray(new OneDebt[finalList.size()]);
+                    RecyclerView recyclerView = findViewById(R.id.listViewOneFriendProfile);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    OneFriendProfile.DebtsAdapter arrayAdapter = new OneFriendProfile.DebtsAdapter(getApplicationContext(), friendList1);
+                    recyclerView.setAdapter(arrayAdapter);
                     System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
                 }
             }
@@ -242,6 +330,11 @@ public class OneFriendProfile  extends AppCompatActivity {
                     finalList.addAll(debts1);
                     finalList.addAll(debts2);
                     finalList.addAll(debts3);
+                    OneDebt [] friendList1 = finalList.toArray(new OneDebt[finalList.size()]);
+                    RecyclerView recyclerView = findViewById(R.id.listViewOneFriendProfile);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    DebtsAdapter arrayAdapter = new OneFriendProfile.DebtsAdapter(getApplicationContext(), friendList1);
+                    recyclerView.setAdapter(arrayAdapter);
                     System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
                 }
 
@@ -289,6 +382,11 @@ public class OneFriendProfile  extends AppCompatActivity {
                     finalList.addAll(debts1);
                     finalList.addAll(debts2);
                     finalList.addAll(debts3);
+                    OneDebt [] friendList1 = finalList.toArray(new OneDebt[finalList.size()]);
+                    RecyclerView recyclerView = findViewById(R.id.listViewOneFriendProfile);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    OneFriendProfile.DebtsAdapter arrayAdapter = new OneFriendProfile.DebtsAdapter(getApplicationContext(), friendList1);
+                    recyclerView.setAdapter(arrayAdapter);
                     System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
                 }
 
@@ -304,145 +402,21 @@ public class OneFriendProfile  extends AppCompatActivity {
                     finalList.addAll(debts1);
                     finalList.addAll(debts2);
                     finalList.addAll(debts3);
+                    OneDebt [] friendList1 = finalList.toArray(new OneDebt[finalList.size()]);
+                    RecyclerView recyclerView = findViewById(R.id.listViewOneFriendProfile);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                    OneFriendProfile.DebtsAdapter arrayAdapter = new OneFriendProfile.DebtsAdapter(getApplicationContext(), friendList1);
+                    recyclerView.setAdapter(arrayAdapter);
                     System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
                 }
             }
 
         });
-        /*JsonArrayRequest jsn1 = new JsonArrayRequest(Request.Method.GET, url_check_friends, null, new Response.Listener<JSONArray>() {
-            //assigns json object values to string and then to appropriate text box
-            @Override
-            public void onResponse(JSONArray response) {
+        if(finalList.size()>0)
+        {
+          textView.setVisibility(View.GONE);
+        }
 
-                String xx = "";
-                xx = response.toString(); //("username");
-                // String countryList[];
-                for (int i = 0; i < response.length(); i++) {
-                    JSONObject jresponse = null;
-                    try {
-                        jresponse = response.getJSONObject(i);
-
-                        String nickname = jresponse.getString("friend");
-                        String first = jresponse.getString("owner");
-                        String status = jresponse.getString("accepted");
-                        friends1.add(new UserFriend(nickname, status, "friend"));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-                eilute.add("friend");
-                draugai.add(friends1);
-                System.out.println("-------friend-----------" + friends1.size());
-                if(eilute.size()==3)
-                {
-                    //String[] text = eilute.toArray(new String[3]);
-                    finalList.addAll(friends);
-                    finalList.addAll(friends1);
-                    finalList.addAll(friends2);
-
-                    // set up the RecyclerView
-                    UserFriend [] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
-                    RecyclerView recyclerView = findViewById(R.id.listView);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    OneFriendProfile.DebtsAdapter arrayAdapter = new OneFriendProfile.DebtsAdapter(getApplicationContext(), friendList1);
-                    recyclerView.setAdapter(arrayAdapter);
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            //error message
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                eilute.add("friend");
-                System.out.println("-----------------------Vo cia----------- friend");
-                if(eilute.size()==3) {
-                    //String[] text = eilute.toArray(new String[3]);
-                    finalList.addAll(friends);
-                    finalList.addAll(friends1);
-                    finalList.addAll(friends2);
-
-                    // set up the RecyclerView
-                    UserFriend[] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
-                    RecyclerView recyclerView = findViewById(R.id.listView);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    OneFriendProfile.DebtsAdapter arrayAdapter = new OneFriendProfile.DebtsAdapter(getApplicationContext(), friendList1);
-                    recyclerView.setAdapter(arrayAdapter);
-                }
-
-            }
-
-        });
-        //  message.setText("null");
-        JsonArrayRequest jsn = new JsonArrayRequest(Request.Method.GET, url_add_friend, null, new Response.Listener<JSONArray>() {
-            //assigns json object values to string and then to appropriate text box
-            @Override
-            public void onResponse(JSONArray response) {
-
-                String xx = "";
-                xx = response.toString(); //("username");
-                // String countryList[];
-                for(int i = 0; i < response.length(); i++){
-                    JSONObject jresponse = null;
-                    try {
-                        jresponse = response.getJSONObject(i);
-
-                        String nickname = jresponse.getString("friend");
-                        String first = jresponse.getString("owner");
-                        String status = jresponse.getString("accepted");
-
-
-                        String username = UserProfile.getName();
-
-                        friends2.add(new UserFriend(nickname, status,"sent"));
-
-                    }
-                    catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-                eilute.add("sent");
-                draugai.add(friends2);
-                System.out.println("-------sent-----------" + friends2.size());
-
-                if(eilute.size()==3)
-                {
-                    //String[] text = eilute.toArray(new String[3]);
-                    finalList.addAll(friends);
-                    finalList.addAll(friends1);
-                    finalList.addAll(friends2);
-
-                    // set up the RecyclerView
-                    UserFriend [] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
-                    RecyclerView recyclerView = findViewById(R.id.listView);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    OneFriendProfile.DebtsAdapter arrayAdapter = new OneFriendProfile.DebtsAdapter(getApplicationContext(), friendList1);
-                    recyclerView.setAdapter(arrayAdapter);
-                }
-            }
-
-        }, new Response.ErrorListener() {
-            //error message
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                // if(friends.size()>0)
-                // {
-                eilute.add("accepted");
-                System.out.println("-----------------------Vo cia");
-                if(eilute.size()==3) {
-                    //String[] text = eilute.toArray(new String[3]);
-                    finalList.addAll(friends);
-                    finalList.addAll(friends1);
-                    finalList.addAll(friends2);
-
-                    // set up the RecyclerView
-                    UserFriend[] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
-                    RecyclerView recyclerView = findViewById(R.id.listView);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    OneFriendProfile.DebtsAdapter arrayAdapter = new OneFriendProfile.DebtsAdapter(getApplicationContext(), friendList1);
-                    recyclerView.setAdapter(arrayAdapter);
-                }
-            }
-        });*/
         queue.add(jsn3);
         queue.add(jsn2);
         queue.add(jsn1);
@@ -451,7 +425,7 @@ public class OneFriendProfile  extends AppCompatActivity {
     }
     public class DebtsAdapter extends RecyclerView.Adapter<OneFriendProfile.DebtsAdapter.ViewHolder> {
 
-        private UserFriend[] localDataSet;      //CIA NE USERFRIEND
+        private OneDebt[] localDataSet;      //CIA NE USERFRIEND
         private LayoutInflater mInflater;
         //private ClickListener  listener;
 
@@ -510,7 +484,7 @@ public class OneFriendProfile  extends AppCompatActivity {
          * by RecyclerView.
          */
         //public CustomAdapter(UserFriend[] dataSet, ClickListener listener)
-        public DebtsAdapter(Context context, UserFriend[] dataSet) {
+        public DebtsAdapter(Context context, OneDebt[] dataSet) {
             localDataSet = dataSet;
             this.mInflater = LayoutInflater.from(context);
             // this.listener = listener;
@@ -518,48 +492,87 @@ public class OneFriendProfile  extends AppCompatActivity {
 
         // Create new views (invoked by the layout manager)
         @Override
-        public OneFriendProfile.DebtsAdapter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
             // Create a new view, which defines the UI of the list item
             LayoutInflater layoutInflater = LayoutInflater.from(viewGroup.getContext());
             View listItem= layoutInflater.inflate(R.layout.activity_viewlist_friend_debt, viewGroup, false);
-            OneFriendProfile.DebtsAdapter.ViewHolder viewHolder = new OneFriendProfile.DebtsAdapter.ViewHolder(listItem);
+            ViewHolder viewHolder = new ViewHolder(listItem);
             return viewHolder;
         }
         @Override
-        public void onBindViewHolder(OneFriendProfile.DebtsAdapter.ViewHolder viewHolder, final int position) {
+        public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
             // Get element from your dataset at this position and replace the
             // contents of the view with that element
             System.out.println("+" + getItemCount());
-            if(localDataSet[position].getType().equals("received"))
+            //finished/accepted/canceled/proposal
+            if(localDataSet[position].getType().equals("received_not_confirmed"))
             {
                 viewHolder.getAddBtn().setVisibility(View.VISIBLE);
                 viewHolder.getDeleteBtn().setVisibility(View.VISIBLE);
-                viewHolder.getTextView().setText((CharSequence) localDataSet[position].getUsername());
+                viewHolder.getTextView().setText((CharSequence) localDataSet[position].getInformation());
             }
-            if(localDataSet[position].getType().equals("sent"))
+            if(localDataSet[position].getType().equals("confirmed_to_us"))
+            {
+                viewHolder.getFinishBtntn().setVisibility(View.VISIBLE);
+                viewHolder.getTextView().setText((CharSequence) localDataSet[position].getInformation());
+            }
+            if(localDataSet[position].getType().equals("confirmed_from_us"))
+            {
+                viewHolder.getTexInDebt().setVisibility(View.VISIBLE);
+                viewHolder.getTextView().setText((CharSequence) localDataSet[position].getInformation());
+            }
+            if(localDataSet[position].getType().equals("sent_not_confirmed"))
             {
                 viewHolder.getTextRequest().setVisibility(View.VISIBLE);
-                viewHolder.getTextView().setText((CharSequence) localDataSet[position].getUsername());
+                viewHolder.getTextView().setText((CharSequence) localDataSet[position].getInformation());
             }
-            if(localDataSet[position].getType().equals("friend"))
-            {
-                viewHolder.getTextView().setText((CharSequence) localDataSet[position].getUsername());
-            }
-            viewHolder.getAddBtn().setOnClickListener(new View.OnClickListener() {
+           viewHolder.getAddBtn().setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     int row = viewHolder.getAdapterPosition();
-                    String username = localDataSet[row].getUsername();
-                    String url_patch = "http://134.209.250.135:8080/user/friend-request/";
-                    url_patch += username;
+                    int id = localDataSet[row].getId();
+                    String url_patch = "http://134.209.250.135:8080/user/debt-request/";
+                    url_patch += id;
                     StringRequest stringRequest = new StringRequest
                             (Request.Method.PATCH, url_patch, new Response.Listener<String>() {
 
                                 @Override
                                 public void onResponse(String response) {
                                     //Kazka gal isvest i ekrana kad pridejo
-
+                                    //localDataSet[row].setType("confirmed_to_us");
                                     viewHolder.addBtn.setVisibility(View.GONE);
+
+                                }
+                            }, new Response.ErrorListener() {
+
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    // Kazka pasakyt kad nejo prideti
+
+                                    // int a = 5;
+                                }
+                            });
+
+                    // Access the RequestQueue through your singleton class.
+                    RequestGate.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+
+
+                }
+            });
+            viewHolder.getFinishBtntn().setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    int row = viewHolder.getAdapterPosition();
+                    int id = localDataSet[row].getId();
+                    String url_patch = "http://134.209.250.135:8080/user/debt/";
+                    url_patch += id;
+                    StringRequest stringRequest = new StringRequest
+                            (Request.Method.PATCH, url_patch, new Response.Listener<String>() {
+
+                                @Override
+                                public void onResponse(String response) {
+                                    viewHolder.finishBtn.setVisibility(View.GONE);
+
+
                                 }
                             }, new Response.ErrorListener() {
 
@@ -578,26 +591,21 @@ public class OneFriendProfile  extends AppCompatActivity {
                 }
             });
 
-           /* viewHolder.getDeleteBtn().setOnClickListener(new View.OnClickListener() {
+            viewHolder.getDeleteBtn().setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     int row = viewHolder.getAdapterPosition();
-                    String username = localDataSet[row].getUsername();
-                    String url_patch = url_check_friends+"/";
-                    url_patch += username;
+                    int id = localDataSet[row].getId();
+                    String url_patch = "http://134.209.250.135:8080/user/debt-request/";
+                    url_patch += id;
                     StringRequest stringRequest = new StringRequest
                             (Request.Method.DELETE, url_patch, new Response.Listener<String>() {
 
                                 @Override
                                 public void onResponse(String response) {
                                     //Kazka gal isvest i ekrana kad pridejo
-
-                                    viewHolder.deleteBtn.setVisibility(View.GONE);
                                     viewHolder.addBtn.setVisibility(View.GONE);
-
-
-//                                    viewHolder.textFriend.setText("Added friend");
-//                                    viewHolder.textFriend.setVisibility(View.VISIBLE);
-//                                    viewHolder.notify();
+                                    viewHolder.deleteBtn.setVisibility(View.GONE);
+                                    viewHolder.textView.setVisibility(View.GONE);
                                 }
                             }, new Response.ErrorListener() {
 
@@ -605,16 +613,14 @@ public class OneFriendProfile  extends AppCompatActivity {
                                 public void onErrorResponse(VolleyError error) {
                                     // Kazka pasakyt kad nejo prideti
 
-                                    int a = 5;
+                                    // int a = 5;
                                 }
                             });
 
                     // Access the RequestQueue through your singleton class.
                     RequestGate.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
-
-
                 }
-            });*/
+            });
         }
 
         // Return the size of your dataset (invoked by the layout manager)

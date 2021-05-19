@@ -177,12 +177,19 @@ public class OneFriendProfile  extends AppCompatActivity {
                     finalList.addAll(debts1);
                     finalList.addAll(debts2);
                     finalList.addAll(debts3);
-                    OneDebt [] friendList1 = finalList.toArray(new OneDebt[finalList.size()]);
-                    RecyclerView recyclerView = findViewById(R.id.listViewOneFriendProfile);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    OneFriendProfile.DebtsAdapter arrayAdapter = new OneFriendProfile.DebtsAdapter(getApplicationContext(), friendList1);
-                    recyclerView.setAdapter(arrayAdapter);
-                    System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
+                    if(finalList.size()==0)
+                    {
+                        textView.setVisibility(View.VISIBLE);
+                    }
+                    else{
+                        OneDebt [] friendList1 = finalList.toArray(new OneDebt[finalList.size()]);
+                        RecyclerView recyclerView = findViewById(R.id.listViewOneFriendProfile);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                        OneFriendProfile.DebtsAdapter arrayAdapter = new OneFriendProfile.DebtsAdapter(getApplicationContext(), friendList1);
+                        recyclerView.setAdapter(arrayAdapter);
+                        System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
+                    }
+
                 }
             }
 
@@ -197,12 +204,18 @@ public class OneFriendProfile  extends AppCompatActivity {
                     finalList.addAll(debts1);
                     finalList.addAll(debts2);
                     finalList.addAll(debts3);
-                    OneDebt [] friendList1 = finalList.toArray(new OneDebt[finalList.size()]);
-                    RecyclerView recyclerView = findViewById(R.id.listViewOneFriendProfile);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    OneFriendProfile.DebtsAdapter arrayAdapter = new OneFriendProfile.DebtsAdapter(getApplicationContext(), friendList1);
-                    recyclerView.setAdapter(arrayAdapter);
-                    System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
+                    if(finalList.size()==0)
+                    {
+                        textView.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        OneDebt[] friendList1 = finalList.toArray(new OneDebt[finalList.size()]);
+                        RecyclerView recyclerView = findViewById(R.id.listViewOneFriendProfile);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                        OneFriendProfile.DebtsAdapter arrayAdapter = new OneFriendProfile.DebtsAdapter(getApplicationContext(), friendList1);
+                        recyclerView.setAdapter(arrayAdapter);
+                        System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
+                    }
                 }
             }
 
@@ -243,12 +256,18 @@ public class OneFriendProfile  extends AppCompatActivity {
                     finalList.addAll(debts1);
                     finalList.addAll(debts2);
                     finalList.addAll(debts3);
-                    OneDebt [] friendList1 = finalList.toArray(new OneDebt[finalList.size()]);
-                    RecyclerView recyclerView = findViewById(R.id.listViewOneFriendProfile);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    OneFriendProfile.DebtsAdapter arrayAdapter = new OneFriendProfile.DebtsAdapter(getApplicationContext(), friendList1);
-                    recyclerView.setAdapter(arrayAdapter);
-                    System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
+                    if(finalList.size()==0)
+                    {
+                        textView.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        OneDebt[] friendList1 = finalList.toArray(new OneDebt[finalList.size()]);
+                        RecyclerView recyclerView = findViewById(R.id.listViewOneFriendProfile);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                        OneFriendProfile.DebtsAdapter arrayAdapter = new OneFriendProfile.DebtsAdapter(getApplicationContext(), friendList1);
+                        recyclerView.setAdapter(arrayAdapter);
+                        System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
+                    }
                 }
             }
 
@@ -263,12 +282,18 @@ public class OneFriendProfile  extends AppCompatActivity {
                     finalList.addAll(debts1);
                     finalList.addAll(debts2);
                     finalList.addAll(debts3);
-                    OneDebt [] friendList1 = finalList.toArray(new OneDebt[finalList.size()]);
-                    RecyclerView recyclerView = findViewById(R.id.listViewOneFriendProfile);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    OneFriendProfile.DebtsAdapter arrayAdapter = new OneFriendProfile.DebtsAdapter(getApplicationContext(), friendList1);
-                    recyclerView.setAdapter(arrayAdapter);
-                    System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
+                    if(finalList.size()==0)
+                    {
+                        textView.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        OneDebt[] friendList1 = finalList.toArray(new OneDebt[finalList.size()]);
+                        RecyclerView recyclerView = findViewById(R.id.listViewOneFriendProfile);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                        OneFriendProfile.DebtsAdapter arrayAdapter = new OneFriendProfile.DebtsAdapter(getApplicationContext(), friendList1);
+                        recyclerView.setAdapter(arrayAdapter);
+                        System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
+                    }
                 }
 
             }
@@ -310,12 +335,18 @@ public class OneFriendProfile  extends AppCompatActivity {
                     finalList.addAll(debts1);
                     finalList.addAll(debts2);
                     finalList.addAll(debts3);
-                    OneDebt [] friendList1 = finalList.toArray(new OneDebt[finalList.size()]);
-                    RecyclerView recyclerView = findViewById(R.id.listViewOneFriendProfile);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    OneFriendProfile.DebtsAdapter arrayAdapter = new OneFriendProfile.DebtsAdapter(getApplicationContext(), friendList1);
-                    recyclerView.setAdapter(arrayAdapter);
-                    System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
+                    if(finalList.size()==0)
+                    {
+                        textView.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        OneDebt[] friendList1 = finalList.toArray(new OneDebt[finalList.size()]);
+                        RecyclerView recyclerView = findViewById(R.id.listViewOneFriendProfile);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                        OneFriendProfile.DebtsAdapter arrayAdapter = new OneFriendProfile.DebtsAdapter(getApplicationContext(), friendList1);
+                        recyclerView.setAdapter(arrayAdapter);
+                        System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
+                    }
                 }
             }
 
@@ -330,12 +361,18 @@ public class OneFriendProfile  extends AppCompatActivity {
                     finalList.addAll(debts1);
                     finalList.addAll(debts2);
                     finalList.addAll(debts3);
-                    OneDebt [] friendList1 = finalList.toArray(new OneDebt[finalList.size()]);
-                    RecyclerView recyclerView = findViewById(R.id.listViewOneFriendProfile);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    DebtsAdapter arrayAdapter = new OneFriendProfile.DebtsAdapter(getApplicationContext(), friendList1);
-                    recyclerView.setAdapter(arrayAdapter);
-                    System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
+                    if(finalList.size()==0)
+                    {
+                        textView.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        OneDebt[] friendList1 = finalList.toArray(new OneDebt[finalList.size()]);
+                        RecyclerView recyclerView = findViewById(R.id.listViewOneFriendProfile);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                        DebtsAdapter arrayAdapter = new OneFriendProfile.DebtsAdapter(getApplicationContext(), friendList1);
+                        recyclerView.setAdapter(arrayAdapter);
+                        System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
+                    }
                 }
 
             }
@@ -382,12 +419,18 @@ public class OneFriendProfile  extends AppCompatActivity {
                     finalList.addAll(debts1);
                     finalList.addAll(debts2);
                     finalList.addAll(debts3);
-                    OneDebt [] friendList1 = finalList.toArray(new OneDebt[finalList.size()]);
-                    RecyclerView recyclerView = findViewById(R.id.listViewOneFriendProfile);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    OneFriendProfile.DebtsAdapter arrayAdapter = new OneFriendProfile.DebtsAdapter(getApplicationContext(), friendList1);
-                    recyclerView.setAdapter(arrayAdapter);
-                    System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
+                    if(finalList.size()==0)
+                    {
+                        textView.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        OneDebt[] friendList1 = finalList.toArray(new OneDebt[finalList.size()]);
+                        RecyclerView recyclerView = findViewById(R.id.listViewOneFriendProfile);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                        OneFriendProfile.DebtsAdapter arrayAdapter = new OneFriendProfile.DebtsAdapter(getApplicationContext(), friendList1);
+                        recyclerView.setAdapter(arrayAdapter);
+                        System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
+                    }
                 }
 
             }
@@ -402,12 +445,18 @@ public class OneFriendProfile  extends AppCompatActivity {
                     finalList.addAll(debts1);
                     finalList.addAll(debts2);
                     finalList.addAll(debts3);
-                    OneDebt [] friendList1 = finalList.toArray(new OneDebt[finalList.size()]);
-                    RecyclerView recyclerView = findViewById(R.id.listViewOneFriendProfile);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                    OneFriendProfile.DebtsAdapter arrayAdapter = new OneFriendProfile.DebtsAdapter(getApplicationContext(), friendList1);
-                    recyclerView.setAdapter(arrayAdapter);
-                    System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
+                    if(finalList.size()==0)
+                    {
+                        textView.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        OneDebt[] friendList1 = finalList.toArray(new OneDebt[finalList.size()]);
+                        RecyclerView recyclerView = findViewById(R.id.listViewOneFriendProfile);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                        OneFriendProfile.DebtsAdapter arrayAdapter = new OneFriendProfile.DebtsAdapter(getApplicationContext(), friendList1);
+                        recyclerView.setAdapter(arrayAdapter);
+                        System.out.println("+++++++++++++++++++++++++++++++++++" + finalList.size());
+                    }
                 }
             }
 

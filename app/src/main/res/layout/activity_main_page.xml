@@ -7,14 +7,27 @@
     android:background="@drawable/gradient"
     tools:context=".MainActivity">
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:ignore="MissingConstraints">
+        <ListView
+            android:id="@+id/listViewNotifications"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp" />
+    </RelativeLayout>
+
     <Button
         android:id="@+id/button_main_friends"
         android:layout_width="125dp"
         android:layout_height="50dp"
-        android:layout_marginTop="128dp"
-        android:gravity="center"
+        android:layout_marginTop="164dp"
         android:backgroundTint="@color/third"
         android:fontFamily="@font/abeezee"
+        android:gravity="center"
         android:shadowColor="@color/first"
         android:text="Friends"
         android:textColor="@color/white"

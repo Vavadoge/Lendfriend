@@ -74,17 +74,11 @@ public class FriendsProfiles extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
-      //  button = (Button) findViewById(R.id.buttonFriend);
-        //button = (Button) findViewById(R.id.friendsList);
         listView = (RecyclerView) findViewById(R.id.listView);
         queue = Volley.newRequestQueue(this);
-
-//        listViewNotFriends =(RecyclerView) findViewById(R.id.appendingFriends);
-       // input_otherUser = (EditText) findViewById(R.id.friendsName);
-     //   buttonDebt = (Button) findViewById(R.id.buttonDebt);
-    //    quote =  (TextView) findViewById(R.id.textview_friends_quote);
         textInvite =  (TextView) findViewById(R.id.textView_friends_invite);
         textView_invite_action =  (TextView) findViewById(R.id.textView_friends_invite_action);
+
         textView_invite_action.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,6 +89,7 @@ public class FriendsProfiles extends AppCompatActivity {
                 finish();
             }
         });
+
         fab = (FloatingActionButton) findViewById(R.id.home_friends_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,28 +98,9 @@ public class FriendsProfiles extends AppCompatActivity {
 
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
-
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                //      .setAction("Action", null).show();
             }
         });
 
-
-     /*
-
-*/
-
-      /*  buttonDebt.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Debts.class);
-                startActivity(intent);
-                Intent intent1 = new Intent(FriendsProfiles.this, Profile.class);
-                startActivity(intent1);
-
-            }
-        });*/
         JsonArrayRequest jsn2 = new JsonArrayRequest(Request.Method.GET, url_check_friend_requests, null, new Response.Listener<JSONArray>() {
             //assigns json object values to string and then to appropriate text box
             @Override
@@ -179,6 +155,11 @@ public class FriendsProfiles extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 eilute.add("received");
                 System.out.println("-----------------------Vo cia----------- received");
+                if(eilute.size()==0)
+                {
+                    textInvite.setVisibility(View.VISIBLE);
+                    textView_invite_action.setVisibility(View.VISIBLE);
+                }
                 if(eilute.size()==3) {
                     //String[] text = eilute.toArray(new String[3]);
                     finalList.addAll(friends);
@@ -242,6 +223,10 @@ public class FriendsProfiles extends AppCompatActivity {
                 eilute.add("friend");
                 draugai.add(friends1);
                 System.out.println("-------friend-----------" + friends1.size());
+                if(friends1.size()>0) {
+                    textInvite.setVisibility(View.VISIBLE);
+                    textView_invite_action.setVisibility(View.VISIBLE);
+                }
                 if(eilute.size()==3)
                 {
                     //String[] text = eilute.toArray(new String[3]);
@@ -294,6 +279,11 @@ public class FriendsProfiles extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 eilute.add("friend");
                 System.out.println("-----------------------Vo cia----------- friend");
+                if(eilute.size()==0)
+                {
+                    textInvite.setVisibility(View.VISIBLE);
+                    textView_invite_action.setVisibility(View.VISIBLE);
+                }
                 if(eilute.size()==3) {
                     //String[] text = eilute.toArray(new String[3]);
                     finalList.addAll(friends);
@@ -417,8 +407,14 @@ public class FriendsProfiles extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                // if(friends.size()>0)
                // {
+
                     eilute.add("accepted");
                     System.out.println("-----------------------Vo cia");
+                    if(eilute.size()==0)
+                    {
+                        textInvite.setVisibility(View.VISIBLE);
+                        textView_invite_action.setVisibility(View.VISIBLE);
+                    }
                     if(eilute.size()==3) {
                         //String[] text = eilute.toArray(new String[3]);
                         finalList.addAll(friends);
@@ -472,6 +468,8 @@ public class FriendsProfiles extends AppCompatActivity {
             }
 
         });
+
+
 
        // System.out.println("SVARBUUUUUUUU DYDIS  " + kiekis)
         queue.add(jsn2);
@@ -693,132 +691,3 @@ public class FriendsProfiles extends AppCompatActivity {
         }
     }
 }
-
- /*
-        button.setOnClickListener(new View.OnClickListener() {
-
-            //when user press log out button, the  profile page is redirected to login page
-            @Override
-            public void onClick(View v) {
-                otherName = input_otherUser.getText().toString();
-                // testing = (TextView) findViewById(R.id.textView11);
-
-                JSONObject test = new JSONObject();
-                try {
-                    test.put("username", otherName);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                        (Request.Method.POST, url_add_friend, test, new Response.Listener<JSONObject>()  {
-
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                //testing.setText("krabas");
-                                //   message.setText("Response: " + response);
-                                //     Log.i("tag", "test");
-                                //  kazkas = testing.getText().toString();
-
-
-                                //     Intent intent = new Intent(getApplicationContext(), Login.class);
-                                //startActivity(intent);
-                            }
-                        }, new Response.ErrorListener() {
-
-                            //error message
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                // TODO: Handle error
-                                //error.printStackTrace();
-                                // testing.setText("AAAAAAA");
-                                try {
-                                    // testing.setText(error.networkResponse==null?"taip":"ne");
-                                    if(error.networkResponse != null)
-                                    {
-                                        if(error.networkResponse.data != null)
-                                        {
-                                            message.setText("Error: " + new JSONObject(new String(error.networkResponse.data)));
-                                        }
-                                        else
-                                        {
-                                            message.setText(String.valueOf(error.networkResponse.statusCode));
-
-                                        }
-                                    }
-                                    else
-                                    {
-                                        //  message.setText("null");
-                                        JsonArrayRequest jsn = new JsonArrayRequest(Request.Method.GET, url_add_friend, null, new Response.Listener<JSONArray>() {
-                                            //assigns json object values to string and then to appropriate text box
-                                            @Override
-                                            public void onResponse(JSONArray response) {
-                                                //message.setText("Response2: " + response.toString());
-                                                //   testing.setText("bet kas");
-                                                String xx = "";
-                                                // try {
-                                                xx = response.toString(); //("username");
-                                                // ArrayList<String> arrayList = new ArrayList<>();
-
-                                                for(int i = 0; i < response.length(); i++){
-                                                    JSONObject jresponse = null;
-                                                    try {
-                                                        jresponse = response.getJSONObject(i);
-                                                        String nickname = jresponse.getString("second_user");
-                                                        // arrayList.add(nickname);
-                                                        Log.d("second_user", nickname);
-                                                    } catch (JSONException e) {
-                                                        e.printStackTrace();
-                                                    }
-
-                                                }
-
-
-                                                // testing.setText(xx);
-
-                                            }
-                                        }, new Response.ErrorListener() {
-                                            //error message
-                                            @Override
-                                            public void onErrorResponse(VolleyError error) {
-                                                //    testing.setText("kazkas");
-                                                try {
-                                                    if(error.networkResponse != null)
-                                                    {
-                                                        if(error.networkResponse.data != null)
-                                                        {
-                                                            message.setText("Error: " + new JSONObject(new String(error.networkResponse.data)));
-                                                        }
-                                                        else
-                                                        {
-                                                            message.setText(String.valueOf(error.networkResponse.statusCode));
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        message.setText("null");
-                                                    }
-                                                } catch (JSONException e) {
-                                                    e.printStackTrace();
-                                                }
-                                            }
-
-                                        });
-                                        RequestGate.getInstance(getApplicationContext()).addToRequestQueue(jsn);
-
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-
-                            }
-                        });
-
-                // Access the RequestQueue through your singleton class.
-                RequestGate.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
-            }
-        });
-*/
-
- 

@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     String url_logout = "http://134.209.250.135:8080/user/logout";
     Button buttonFriends,buttonDebts, buttonProfile, buttonAddFriend, logout;
     FloatingActionButton fab;
+    ListView listView;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
         buttonAddFriend = (Button) findViewById(R.id.button_main_add_friend);
         fab = (FloatingActionButton) findViewById(R.id.add_fab);
         logout = (Button) findViewById(R.id.button_main_logout);
+        listView = (ListView)findViewById(R.id.listViewNotifications);
+
 
 
         buttonFriends.setOnClickListener(new View.OnClickListener() {

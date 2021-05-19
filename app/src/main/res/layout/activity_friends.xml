@@ -39,6 +39,7 @@
         android:fontFamily="@font/abeezee"
         android:text="You don't have any friend, so what are you waiting for?"
         android:textSize="14dp"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view5" />

@@ -590,6 +590,9 @@ public class OneFriendProfile  extends AppCompatActivity {
                                     //Kazka gal isvest i ekrana kad pridejo
                                     //localDataSet[row].setType("confirmed_to_us");
                                     viewHolder.addBtn.setVisibility(View.GONE);
+                                    viewHolder.deleteBtn.setVisibility(View.INVISIBLE);
+                                    viewHolder.textInDebt.setVisibility(View.VISIBLE);
+
 
                                 }
                             }, new Response.ErrorListener() {
@@ -619,9 +622,8 @@ public class OneFriendProfile  extends AppCompatActivity {
 
                                 @Override
                                 public void onResponse(String response) {
-                                    viewHolder.finishBtn.setVisibility(View.GONE);
-
-
+                                    viewHolder.finishBtn.setVisibility(View.INVISIBLE);
+                                    viewHolder.textView.setVisibility(View.INVISIBLE);
                                 }
                             }, new Response.ErrorListener() {
 

@@ -137,8 +137,8 @@ public class FriendsProfiles extends AppCompatActivity {
                         textView_invite_action.setVisibility(View.VISIBLE);
                     }
                     else{
-                        textInvite.setVisibility(View.GONE);
-                        textView_invite_action.setVisibility(View.GONE);
+                        textInvite.setVisibility(View.INVISIBLE);
+                        textView_invite_action.setVisibility(View.INVISIBLE);
 
                         // set up the RecyclerView
                         UserFriend [] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
@@ -176,8 +176,8 @@ public class FriendsProfiles extends AppCompatActivity {
                     }
                     else
                     {
-                        textInvite.setVisibility(View.GONE);
-                        textView_invite_action.setVisibility(View.GONE);
+                        textInvite.setVisibility(View.INVISIBLE);
+                        textView_invite_action.setVisibility(View.INVISIBLE);
 
                         // set up the RecyclerView
                         UserFriend[] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
@@ -248,8 +248,8 @@ public class FriendsProfiles extends AppCompatActivity {
                         textView_invite_action.setVisibility(View.VISIBLE);
                     }
                     else{
-                        textInvite.setVisibility(View.GONE);
-                        textView_invite_action.setVisibility(View.GONE);
+                        textInvite.setVisibility(View.INVISIBLE);
+                        textView_invite_action.setVisibility(View.INVISIBLE);
 
                         // set up the RecyclerView
                         UserFriend [] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
@@ -309,8 +309,8 @@ public class FriendsProfiles extends AppCompatActivity {
                     }
                     else{
                         //quote.setVisibility(View.GONE);
-                        textInvite.setVisibility(View.GONE);
-                        textView_invite_action.setVisibility(View.GONE);
+                        textInvite.setVisibility(View.INVISIBLE);
+                        textView_invite_action.setVisibility(View.INVISIBLE);
 
                         // set up the RecyclerView
                         UserFriend[] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
@@ -389,8 +389,8 @@ public class FriendsProfiles extends AppCompatActivity {
                         textView_invite_action.setVisibility(View.VISIBLE);
                     }
                     else{
-                        textInvite.setVisibility(View.GONE);
-                        textView_invite_action.setVisibility(View.GONE);
+                        textInvite.setVisibility(View.INVISIBLE);
+                        textView_invite_action.setVisibility(View.INVISIBLE);
 
                         // set up the RecyclerView
                         UserFriend [] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
@@ -455,8 +455,8 @@ public class FriendsProfiles extends AppCompatActivity {
                             textView_invite_action.setVisibility(View.VISIBLE);
                         }
                         else{
-                            textInvite.setVisibility(View.GONE);
-                            textView_invite_action.setVisibility(View.GONE);
+                            textInvite.setVisibility(View.INVISIBLE);
+                            textView_invite_action.setVisibility(View.INVISIBLE);
 
                             // set up the RecyclerView
                             UserFriend[] friendList1 = finalList.toArray(new UserFriend[finalList.size()]);
@@ -659,7 +659,11 @@ public class FriendsProfiles extends AppCompatActivity {
                                 public void onResponse(String response) {
                                     //Kazka gal isvest i ekrana kad pridejo
 
-                                    viewHolder.addBtn.setVisibility(View.GONE);
+                                    viewHolder.addBtn.setVisibility(View.INVISIBLE);
+                                    viewHolder.deleteBtn.setVisibility(View.INVISIBLE);
+                                    viewHolder.textFriend.setVisibility(View.VISIBLE);
+
+
 //                                    viewHolder.textFriend.setText("Added friend");
 //                                    viewHolder.textFriend.setVisibility(View.VISIBLE);
 //                                    viewHolder.notify();
@@ -693,9 +697,9 @@ public class FriendsProfiles extends AppCompatActivity {
                                 @Override
                                 public void onResponse(String response) {
                                     //Kazka gal isvest i ekrana kad pridejo
-                                    viewHolder.textFriend.setVisibility(View.GONE);
-                                    viewHolder.deleteBtn.setVisibility(View.GONE);
-                                    viewHolder.addBtn.setVisibility(View.GONE);
+                                    viewHolder.textView.setVisibility(View.INVISIBLE);
+                                    viewHolder.deleteBtn.setVisibility(View.INVISIBLE);
+                                    viewHolder.addBtn.setVisibility(View.INVISIBLE);
 
 
 //                                    viewHolder.textFriend.setText("Added friend");

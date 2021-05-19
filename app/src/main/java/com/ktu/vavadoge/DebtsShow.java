@@ -51,13 +51,14 @@ public class DebtsShow extends AppCompatActivity {
     ArrayList<String> friends = new ArrayList<>();
     TextView textInvite, textView_invite_action;//quote,
     FloatingActionButton fab, fab1;
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_debts);
         listView = (ListView) findViewById(R.id.listViewDebts);
-
+        TextView textView = (TextView) findViewById(R.id.textView21);
         fab = (FloatingActionButton) findViewById(R.id.home_debts_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +95,7 @@ public class DebtsShow extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+
                 if (friends.size() > 0) {
 
 
@@ -104,11 +106,18 @@ public class DebtsShow extends AppCompatActivity {
                     listView.setAdapter(arrayAdapter);
                     listView.setOnItemClickListener(listClick);
                 }
+                else{
+                    textView.setVisibility(View.VISIBLE);
+                }
             }
         }, new Response.ErrorListener() {
             //error message
             @Override
             public void onErrorResponse(VolleyError error) {
+                if (friends.size() == 0)
+                {
+                    textView.setVisibility(View.VISIBLE);
+                }
             }
 
         });

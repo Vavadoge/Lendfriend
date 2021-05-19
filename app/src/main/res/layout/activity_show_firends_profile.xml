@@ -35,7 +35,7 @@
         android:textColor="@color/white"
         android:visibility="invisible"
         android:fontFamily="@font/abeezee"
-        android:text="You do not have any debt and no one is in debt to you " />
+        android:text="You do not have any debts and your friend is not in debt to you " />
 
     <RelativeLayout
         android:layout_width="match_parent"

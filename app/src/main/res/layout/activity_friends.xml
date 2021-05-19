@@ -42,6 +42,7 @@
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:visibility="invisible"
         app:layout_constraintTop_toBottomOf="@+id/view5" />
     <TextView
         android:id="@+id/textView_friends_invite_action"
@@ -50,6 +51,7 @@
         android:fontFamily="@font/abeezee"
         android:text="Invite friends!"
         android:textColor="@color/first"
+        android:visibility="invisible"
         android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="@+id/textView_friends_invite"
         app:layout_constraintStart_toStartOf="@+id/textView_friends_invite"

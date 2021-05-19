@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -59,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
         fab = (FloatingActionButton) findViewById(R.id.add_fab);
         logout = (Button) findViewById(R.id.button_main_logout);
         listView = (ListView)findViewById(R.id.listViewNotifications);
-
 
 
         buttonFriends.setOnClickListener(new View.OnClickListener() {
@@ -178,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
 
                         String text = "You haven't returned the debt " + information + " to " + user + " for " +  days + " days";
                         System.out.println(text);
-                        if (days > 0)
+                        if (days >= 0)
                             norifications.add(text);
                         //String nickname = jresponse.getString("friend");
                         //String first = jresponse.getString("owner");
@@ -226,7 +227,5 @@ public class MainActivity extends AppCompatActivity {
         });
         RequestGate.getInstance(getApplicationContext()).addToRequestQueue(jsn1);
     }
-
-
 
 }

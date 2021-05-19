@@ -18,16 +18,14 @@
 
     <TextView
         android:id="@+id/textboxAlreadyFriend"
-        android:layout_width="126dp"
-        android:layout_height="50dp"
+        android:layout_width="87dp"
+        android:layout_height="39dp"
         android:layout_alignBottom="@+id/FriendText"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
         android:layout_marginStart="40dp"
-        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="95dp"
-        android:layout_marginBottom="0dp"
+        android:layout_marginRight="111dp"
+        android:layout_marginBottom="1dp"
         android:layout_toEndOf="@+id/FriendText"
         android:fontFamily="@font/abeezee"
         android:paddingLeft="8dp"
@@ -49,6 +47,18 @@
         android:shadowColor="@color/first"
         android:textColor="@color/white"
         android:text="Delete"
+        android:visibility="invisible"/>
+    <Button
+        android:id="@+id/unfriend_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="7dp"
+        android:backgroundTint="@color/fifth"
+        android:fontFamily="@font/abeezee"
+        android:shadowColor="@color/first"
+        android:textColor="@color/white"
+        android:text="UNFRIEND"
         android:visibility="invisible"/>
 
     <Button

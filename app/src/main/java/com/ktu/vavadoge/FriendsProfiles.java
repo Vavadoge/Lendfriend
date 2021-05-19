@@ -85,7 +85,6 @@ public class FriendsProfiles extends AppCompatActivity {
 
                 Intent intent = new Intent(getApplicationContext(), AddingFriend.class);
                 startActivity(intent);
-
                 finish();
             }
         });
@@ -271,9 +270,6 @@ public class FriendsProfiles extends AppCompatActivity {
                 {
 
                     //quote.setVisibility(View.GONE);
-                    textInvite.setVisibility(View.GONE);
-                    textView_invite_action.setVisibility(View.GONE);
-
                     // set up the RecyclerView
 
                     UserFriend [] friendList1 = friends1.toArray(new UserFriend[friends1.size()]);
@@ -522,8 +518,7 @@ public class FriendsProfiles extends AppCompatActivity {
         /*if(friends.size()>0)
         {
             //quote.setVisibility(View.GONE);
-            textInvite.setVisibility(View.GONE);
-            textView_invite_action.setVisibility(View.GONE);
+
 
             // set up the RecyclerView
 
@@ -565,6 +560,7 @@ public class FriendsProfiles extends AppCompatActivity {
             private final TextView textView;
             private final Button addBtn;
             private final Button deleteBtn;
+            private final Button unfriendBtn;
             private final TextView textFriend;
             private final TextView textRequest;
             public RelativeLayout relativeLayout;
@@ -576,6 +572,7 @@ public class FriendsProfiles extends AppCompatActivity {
 
                 textView = (TextView) view.findViewById(R.id.FriendText);
                 addBtn = (Button)view.findViewById(R.id.add_btn);
+                unfriendBtn = (Button)view.findViewById(R.id.unfriend_btn);
                 deleteBtn = (Button)view.findViewById(R.id.delete_btn);
                 textFriend = (TextView)view.findViewById(R.id.textboxAlreadyFriend);
                 textRequest = (TextView)view.findViewById(R.id.textboxRequestWasSent);
@@ -588,6 +585,9 @@ public class FriendsProfiles extends AppCompatActivity {
             }
             public Button getAddBtn() {
                 return addBtn;
+            }
+            public Button getUnfriendBtn() {
+                return unfriendBtn;
             }
             public Button getDeleteBtn() {
                 return deleteBtn;
@@ -642,6 +642,7 @@ public class FriendsProfiles extends AppCompatActivity {
             if(localDataSet[position].getType().equals("friend"))
             {
                 viewHolder.getTextFriend().setVisibility(View.VISIBLE);
+                viewHolder.getUnfriendBtn().setVisibility(View.VISIBLE);
                 viewHolder.getTextView().setText((CharSequence) localDataSet[position].getUsername());
             }
             viewHolder.getAddBtn().setOnClickListener(new View.OnClickListener() {
@@ -662,11 +663,8 @@ public class FriendsProfiles extends AppCompatActivity {
                                     viewHolder.addBtn.setVisibility(View.INVISIBLE);
                                     viewHolder.deleteBtn.setVisibility(View.INVISIBLE);
                                     viewHolder.textFriend.setVisibility(View.VISIBLE);
+                                    viewHolder.unfriendBtn.setVisibility(View.VISIBLE);
 
-
-//                                    viewHolder.textFriend.setText("Added friend");
-//                                    viewHolder.textFriend.setVisibility(View.VISIBLE);
-//                                    viewHolder.notify();
                                 }
                             }, new Response.ErrorListener() {
 
@@ -685,6 +683,43 @@ public class FriendsProfiles extends AppCompatActivity {
                 }
             });
 
+            viewHolder.getUnfriendBtn().setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    int row = viewHolder.getAdapterPosition();
+                    String username = localDataSet[row].getUsername();
+                    String url_patch = url_check_friends+"/";
+                    url_patch += username;
+                    StringRequest stringRequest = new StringRequest
+                            (Request.Method.DELETE, url_patch, new Response.Listener<String>() {
+
+                                @Override
+                                public void onResponse(String response) {
+                                    //Kazka gal isvest i ekrana kad pridejo
+                                    viewHolder.textView.setVisibility(View.INVISIBLE);
+                                    viewHolder.unfriendBtn.setVisibility(View.INVISIBLE);
+                                    viewHolder.textFriend.setVisibility(View.INVISIBLE);
+
+
+//                                    viewHolder.textFriend.setText("Added friend");
+//                                    viewHolder.textFriend.setVisibility(View.VISIBLE);
+//                                    viewHolder.notify();
+                                }
+                            }, new Response.ErrorListener() {
+
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    // Kazka pasakyt kad nejo prideti
+
+                                    int a = 5;
+                                }
+                            });
+
+                    // Access the RequestQueue through your singleton class.
+                    RequestGate.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+
+
+                }
+            });
            viewHolder.getDeleteBtn().setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     int row = viewHolder.getAdapterPosition();
